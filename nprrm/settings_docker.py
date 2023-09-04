@@ -48,9 +48,13 @@ DEFAULT_FROM_EMAIL = SERVER_EMAIL = EMAIL_HOST_USER
 COMPRESS_ENABLED = True
 
 CACHE_BACKEND = 'django.core.cache.backends.locmem.LocMemCache'
-CACHE_TIMEOUT = os.environ.get("CACHE_TIMEOUT")
+CACHE_TIMEOUT = int(os.environ.get("CACHE_TIMEOUT"))
 CACHES = {
     'default': {
+        'BACKEND': CACHE_BACKEND,
+        'TIMEOUT': CACHE_TIMEOUT,
+    },
+    'news': {
         'BACKEND': CACHE_BACKEND,
         'TIMEOUT': CACHE_TIMEOUT,
     },
