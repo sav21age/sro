@@ -1,7 +1,12 @@
 from django.contrib import admin
 from common.admin import DocumentNameAdmin, DocumentDateAdmin, DocumentYearAdmin
-from documents.forms import CompensationFundAdminForm, DecisionMeetingAdminForm, FederalLawAdminForm, FoundingDocumentAdminForm, InspectionAdminForm, LocalRegulationAdminForm, RegulatoryLegalAdminForm, ReportingAdminForm, TechnicalRegulationAdminForm
-from documents.models import CompensationFund, DecisionMeeting, FederalLaw, FoundingDocument, Inspection, LocalRegulation, RegulatoryLegal, Reporting, TechnicalRegulation
+from documents.forms import (
+    CompensationFundAdminForm, DecisionMeetingAdminForm, FederalLawAdminForm,
+    FoundingDocumentAdminForm, InspectionAdminForm, LocalRegulationAdminForm,
+    RegulatoryLegalAdminForm, ReportingAdminForm, TechnicalRegulationAdminForm)
+from documents.models import (
+    CompensationFund, DecisionMeeting, FederalLaw, FoundingDocument, Inspection,
+    LocalRegulation, RegulatoryLegal, Reporting, TechnicalRegulation)
 
 
 @admin.register(FoundingDocument)

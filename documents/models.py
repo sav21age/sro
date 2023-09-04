@@ -1,8 +1,8 @@
-from common.models import DocumentDate, DocumentName, DocumentYear
 from django.db import models
 from django.core.cache import cache
 from django.dispatch import receiver
 from django.db.models.signals import post_save
+from common.models import DocumentDate, DocumentName, DocumentYear
 
 
 class FoundingDocument(DocumentName):

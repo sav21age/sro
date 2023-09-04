@@ -1,11 +1,11 @@
 from django.contrib import admin
+from django.urls import path
+from django.utils.safestring import mark_safe
+from reportlab.lib.units import inch
+from components.export import export_to_pdf
 from components.models import Location, Member, News, OrgForm, Position
 from files.admin import FileInline
 from common.helpers import formfield_overrides
-from django.urls import path
-from reportlab.lib.units import inch
-from components.export import export_to_pdf
-from django.utils.safestring import mark_safe
 
 
 @admin.register(Location)

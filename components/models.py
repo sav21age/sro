@@ -1,13 +1,13 @@
 from django.db import models
 from django.contrib.contenttypes import fields
-from common.helpers import replace_quotes
-from common.managers import IsVisibleManager
-from files.models import File
 from django.core.validators import MinLengthValidator
 from django.core.exceptions import ValidationError
 from django.core.cache import cache
 from django.dispatch import receiver
 from django.db.models.signals import post_save
+from common.helpers import replace_quotes
+from common.managers import IsVisibleManager
+from files.models import File
 
 
 class Location(models.Model):
