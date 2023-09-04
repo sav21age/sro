@@ -67,32 +67,38 @@ def get_path_params(instance, filename):
 
     return fol, stem[:120], suffix.lower()
 
-# #TODO: remove
-# def get_file_path(instance, filename):
-#     dir, stem, suffix = get_path_params(instance, filename)
-#     return f"{dir}/{stem}{suffix}"
+
+def get_file_path(instance, filename):
+    fol, stem, suffix = get_path_params(instance, filename)
+    return f"{fol}/{stem}{suffix}"
+
 
 def get_doc_name_file_path(instance, filename):
     fol, stem, suffix = get_path_params(instance, filename)
     return f"{fol}/{stem}{suffix}"
+
 
 # #TODO: remove
 # def get_year_file_path(instance, filename):
 #     dir, stem, suffix = get_path_params(instance, filename)
 #     return f"{dir}/{stem}{suffix}"
 
+
 def get_doc_year_file_path(instance, filename):
     fol, stem, suffix = get_path_params(instance, filename)
     return f"{fol}/{stem}{suffix}"
+
 
 # #Todo: remove
 # def get_date_file_path(instance, filename):
 #     dir, stem, suffix = get_path_params(instance, filename)
 #     return f"{dir}/{instance.date}_{stem}{suffix}"
 
+
 def get_doc_date_file_path(instance, filename):
     fol, stem, suffix = get_path_params(instance, filename)
     return f"{fol}/{instance.date}_{stem}{suffix}"
+
 
 def convert_bytes(num):
     """
