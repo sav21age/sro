@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block head %}
+  <title>{{object.head_title}}</title>
+  <meta name="description" content="{{object.meta_description}}">
+{% endblock %} 
+
+{% comment %} {% block h1 %}{{object.title}}{% endblock %} {% endcomment %}
+
+{% block hero_background %}inspection-background{% endblock %}
+
+{% block content %}
+
+<section>
+  <div class="container">
+    {% if object.title %}
+    <div class="section-title">
+      <h1>{{object.title}}</h1>
+    </div>
+    {% endif %}
+
+    {% with caption='График проверок членов СРО Ассоциации' %}
+    {% include 'document-year.html ' %}
+    {% endwith %}
+
+  {% comment %} <table class="table table-borderless table-striped table-responsive align-middle">
+      <thead>
+      <tr>
+          <th class="col-8">График проверок членов СРО Ассоциации</th>
+          <th class="text-center col-2">Файл</th>
+          <th class="text-center col-2">Архив</th>
+      </tr>
+  </thead>
+  <tbody>
+    {% for object in object_list %}
+    <tr>
+    <td>
+        {{ object.year }} г.
+    </td>
+    <td class="text-center">
+        <a href="{% get_media_prefix %}{{ object.file_path }}" title="размер: {{ object.file_size }}"></a>
+    </td>
+    <td class="text-center">
+        <a href="{% get_media_prefix %}{{ object.arc_path }}" title="размер: {{ object.arc_size }}"></a>
+    </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table> {% endcomment %}
+
+  </div>
+</section>
+
+{% endblock %}

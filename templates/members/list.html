@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block head %}
+  <title>{{object.head_title}}</title>
+  <meta name="description" content="{{object.meta_description}}">
+  {% if object.excluded_flag %}
+  <meta name="robots" content="noindex">
+  {% endif %}
+{% endblock %} 
+
+{% comment %} {% block h1 %}{{object.title}}{% endblock %} {% endcomment %}
+
+{% block hero_background %}members-background{% endblock %}
+
+{% block content %}
+
+<section>
+  <div class="container">
+    {% if object.title %}
+    <div class="section-title">
+      <h1>{{object.title}}</h1>
+    </div>
+    {% endif %}
+    {% comment %} {% include "members/table.html" %} {% endcomment %}
+    {{ object.text_top|safe }}
+    {% include "members/div.html" %}
+    {{ object.text_bottom|safe }}
+  </div>
+</section>
+
+{% endblock %}

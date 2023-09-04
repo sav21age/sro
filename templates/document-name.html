@@ -1,0 +1,25 @@
+{% load static %}
+<table class="table table-borderless table-striped table-responsive align-middle">
+    <thead>
+    <tr>
+        <th class="col-8">Название</th>
+        <th class="text-center col-2">Файл</th>
+        {% comment %} <th class="text-center col-2">Архив</th> {% endcomment %}
+    </tr>
+</thead>
+<tbody>
+    {% for object in object_list %}
+    <tr>
+    <td>
+        {{ object.name }}
+    </td>
+    <td class="text-center">
+        <a href="{% get_media_prefix %}{{ object.file_path }}" title="{{ object.name }}, размер файла: {{ object.file_size }}"></a>
+    </td>
+    {% comment %} <td class="text-center">
+        <a href="{% get_media_prefix %}{{ object.arc_path }}" title="{{ object.name }}, размер файла: {{ object.arc_size }}"></a>
+    </td> {% endcomment %}
+    </tr>
+{% endfor %}
+</tbody>
+</table>

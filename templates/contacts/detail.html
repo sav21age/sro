@@ -1,0 +1,83 @@
+{% extends "base.html" %} 
+{% load static tel %} 
+
+{% block head %}
+<title>{{object.head_title}}</title>
+<meta name="description" content="{{object.meta_description}}" />
+{% endblock %} 
+
+{% block hero_background %}contacts-background{% endblock %} 
+
+{% block content %}
+<section>
+  <div class="container">
+    {% if object.title %}
+    <div class="section-title">
+      <h1>{{object.title}}</h1>
+    </div>
+    {% endif %}
+
+    <div class="row">
+
+    <div class="col-md-4">
+      <div class="h-100 d-flex align-items-center p-3">
+        <div class="btn-lg-square flex-shrink-0">
+          <i class="fas fa-user-tie fa-lg icon-primary"></i>
+        </div>
+        <div class="ms-4">
+          <p class="mb-1 fw-medium">Генеральный директор</p>
+          <p class="mb-0">{{ object.contact_person }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="h-100 d-flex align-items-center p-3">
+        <div class="btn-lg-square flex-shrink-0">
+          <i class="fa fa-phone-alt fa-lg icon-primary"></i>
+        </div>
+        <div class="ms-4">
+          <p class="mb-1 fw-medium">Телефон</p>
+          <a class="mb-0" href="tel:{{ object.phone|tel }}">{{ object.phone }}</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="h-100 d-flex align-items-center p-3">
+        <div class="btn-lg-square flex-shrink-0">
+          <i class="fas fa-envelope fa-lg icon-primary"></i>
+        </div>
+        <div class="ms-4">
+          <p class="mb-1 fw-medium">Электронная почта</p>
+          <a class="mb-0 big" href="mailto:{{ object.email }}">{{ object.email }}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+      
+    <div class="row">
+      <div class="col-12">
+        <div class="h-100 d-flex align-items-center p-3">
+          <div class="btn-lg-square flex-shrink-0">
+            <i class="fas fa-map-marker-alt fa-lg icon-primary"></i>
+          </div>
+          <div class="ms-4">
+            <p class="mb-1 fw-medium"><strong>Адрес</strong></p>
+            <p class="mb-0">{{ object.address }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="row px-3 pb-3">
+          <div class="col-12">
+            {{ object.map|safe }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+{% endblock %}

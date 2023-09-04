@@ -1,0 +1,72 @@
+{% load static compress %}
+{% comment %} {% spaceless %} {% endcomment %}
+<!DOCTYPE html>
+<html lang="ru" class="h-100">
+<head>
+  <meta charset="utf-8">
+  {% if debug == True %}
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  {% endif %}
+  <link rel="canonical" href="{{ rel_canonical }}">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+  <link rel="apple-touch-icon" sizes="120x120" href="{% static 'apple-touch-icon.png' %}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon-32x32.png' %}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon-16x16.png' %}">
+  <link rel="manifest" href="{% static 'site.webmanifest' %}">
+  <link rel="mask-icon" href="{% static 'safari-pinned-tab.svg' %}" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+
+  {% block head %}{% endblock %}
+  {% comment %} <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload stylesheet" as="style" href="https://fonts.googleapis.com/css?family=Roboto:wght@400;500&display=swap"> {% endcomment %}
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap">
+
+  {% compress css %}
+  <link type="text/css" href="{% static 'assets/bootstrap/css/main.css' %}" rel="stylesheet" media="screen">
+  <link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet">
+  {% endcompress %}
+</head>
+<body class="d-flex flex-column h-100">
+  {% include 'header.html' %}
+
+  <div class="{% block hero_background %}{% endblock %}">
+    <div class="hero-eclipse py-1 py-md-5">
+      <div class="container my-md-3 text-white text-center lh-sm">
+          <p class="fs-4 d-none d-md-block">
+            Ассоциация «Региональное сотрудничество по проведению ремонтно-монтажных работ в области промышленной безопасности»<br>
+            (Ассоциация «РегионРемМонтаж ПБ»).
+            {% comment %} Саморегулируемая организация в области промышленной безопасности {% endcomment %}
+          </p>
+          <p class="fs-6 fst-italic mt-4 mb-0 d-none d-md-block">
+            Зарегистрировано в Федеральной службе регистрации, кадастра и картографии, в государственном реестре саморегулируемых организаций за №&nbsp;0170&nbsp;от&nbsp;04&nbsp;марта&nbsp;2011&nbsp;г.
+          </p>
+          <p class="fs-6 mb-0 py-4 d-block d-md-none">
+            Ассоциация «Региональное сотрудничество по проведению ремонтно-монтажных работ в области промышленной безопасности»<br>
+            (Ассоциация «РегионРемМонтаж ПБ»).
+          </p>
+      </div>
+    </div>
+  </div>
+  
+  {% block content %}{% endblock %}
+  <div class="divider"></div>
+  <!-- Back to Top -->
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="fas fa-chevron-up"></i></a>
+  {% include 'footer.html' %}
+  <!-- Yandex.Metrika counter -->
+  <!-- /Yandex.Metrika counter -->
+  {% compress js %}
+  <script src="{% static 'assets/bootstrap/js/bundle.js' %}"></script>
+  <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
+  <script src="{% static 'assets/js/main.js' %}"></script>
+  {% endcompress %}
+</body>
+</html>
+{% comment %} {% endspaceless %} {% endcomment %}

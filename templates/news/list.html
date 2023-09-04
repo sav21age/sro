@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load static cache %}
+
+{% block head %}
+  <title>{{object.head_title}}</title>
+  <meta name="description" content="{{object.meta_description}}">
+{% endblock %} 
+
+{% comment %} {% block h1 %}{{object.title}}{% endblock %} {% endcomment %}
+
+{% block hero_background %}news-background{% endblock %}
+
+{% block content %}
+
+<section class="news">
+  <div class="container">
+    {% if object.title %}
+    <div class="section-title">
+      <h1>{{object.title}}</h1>
+    </div>
+    {% endif %}
+    
+    {% for object in object_list %}
+    {% comment %} {% cache cache_timeout news object.id using="news" %} {% endcomment %}
+    <div class="row mb-5">
+      <div class="col-12">
+      <p class="fw-medium mb-1">{{ object.date}} года</p>
+      {% if object.description %}
+      <p class="mb-0">{{ object.description }}</p>
+      {% endif %}
+        
+    {% comment %} {% empty %}
+        <div class="col-lg-12">
+            {% include 'empty.html' %}
+        </div> {% endcomment %}
+
+        {% if object.files.all %}
+        <ul class="ps-0 mb-0 files">
+          {% for file in object.files.all %}
+            <li><a href="{% get_media_prefix %}{{ file.path }}" title="{{ file.name }}">{{ file.name }}</a></li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+
+
+      </div>
+    </div>
+    {% comment %} {% endcache %} {% endcomment %}
+      {% endfor %}
+
+
+    {% include "pagination.html" %}
+  </div>
+</section>
+
+{% endblock %}

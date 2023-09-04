@@ -1,0 +1,15 @@
+{% extends "base.html" %} 
+{% load static %} 
+
+{% block head %}
+<title>{{object.head_title}}</title>
+<meta name="description" content="{{object.meta_description}}" />
+{% endblock %} 
+
+{% block hero_background %}priority-directions-background{% endblock %} 
+
+{% block content %}
+
+{% include "text.html" %}
+
+{% endblock %}

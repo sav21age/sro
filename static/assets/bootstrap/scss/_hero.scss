@@ -1,0 +1,69 @@
+.hero-eclipse{
+  background-color:rgba(0, 0, 0, 0.6);
+}
+
+@mixin hero_background {
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+.index-background {
+    background-image: url(../../../images/background/color-cranes.jpg);
+    @include hero_background;
+}
+
+.news-background {
+    background-image: url(../../../images/background/news.jpg);
+    @include hero_background;
+}
+
+.compensation-fund-background {
+    background-image: url(../../../images/background/compensation-fund.jpg);
+    @include hero_background;
+}
+
+.priority-directions-background {
+    background-image: url(../../../images/background/priority-directions.jpg);
+    @include hero_background;
+}
+
+.contacts-background {
+    background-image: url(../../../images/background/contacts.jpg);
+    @include hero_background;
+}
+
+.join-us-background {
+    background-image: url(../../../images/background/join-us.jpg);
+    @include hero_background;
+}
+
+.decision-meetings-background {
+    background-image: url(../../../images/background/decision-meetings.jpg);
+    @include hero_background;
+}
+
+.members-background {
+    background-image: url(../../../images/background/members.jpg);
+    @include hero_background;
+}
+
+.inspection-background {
+    background-image: url(../../../images/background/inspection.jpg);
+    @include hero_background;
+}
+
+.reporting-background {
+    background-image: url(../../../images/background/reporting.jpg);
+    @include hero_background;
+}
+
+.documents-background {
+    background-image: url(../../../images/background/documents3.jpg);
+    @include hero_background;
+}
+
+.privacy-policy-background {
+    background-image: url(../../../images/background/privacy-policy.jpg);
+    @include hero_background;
+}

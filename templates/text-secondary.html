@@ -1,0 +1,10 @@
+<section class="secondary">
+  <div class="container">
+    {% if title %}
+    <div class="section-title">
+      <span>{{ title }}</span>
+    </div>
+    {% endif %}
+    {{ text|safe }}
+  </div>
+</section>

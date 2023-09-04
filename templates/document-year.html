@@ -1,0 +1,25 @@
+{% load static upload_to %} 
+<table class="table table-borderless table-striped table-responsive align-middle">
+    <thead>
+        <tr>
+        <th class="col-10">{{ caption }}</th>
+        <th class="text-center col-2">Файл</th>
+        {% comment %} <th class="text-center col-2">Архив</th> {% endcomment %}
+        </tr>
+    </thead>
+    <tbody>
+    {% for object in object_list %}
+        <tr>
+        <td>
+            {{ object.year }} г.
+        </td>
+        <td class="text-center">
+            <a href="{% get_media_prefix %}{{ object.file_path }}" title="{{ caption }} {{ object.year }} г., размер файла: {{ object.file_size }}"></a>
+        </td>
+        {% comment %} <td class="text-center">
+            <a href="{% get_media_prefix %}{{ object.arc_path }}" title="{{ caption }} {{ object.year }} г., размер файла: {{ object.arc_size }}"></a>
+        </td> {% endcomment %}
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

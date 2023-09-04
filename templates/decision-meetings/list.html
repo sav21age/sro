@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block head %}
+  <title>{{object.head_title}}</title>
+  <meta name="description" content="{{object.meta_description}}">
+{% endblock %} 
+
+{% comment %} {% block h1 %}{{object.title}}{% endblock %} {% endcomment %}
+
+{% block hero_background %}decision-meetings-background{% endblock %}
+
+{% block content %}
+
+<section>
+  <div class="container">
+    {% if object.title %}
+    <div class="section-title">
+      <h1>{{object.title}}</h1>
+    </div>
+    {% endif %}
+    {{ object.text_top|safe }}
+    <table class="table table-borderless table-striped table-responsive align-middle">
+      <thead>
+        <tr>
+            <th class="col-10">Протокол общего собрания членов</th>
+            <th class="text-center col-2">Файл</th>
+        </tr>
+      </thead>
+      <tbody>
+          {% for object in object_list %}
+          <tr>
+          <td>
+              {{ object.name }} от {{ object.date|date:"d.m.Y" }}&nbsp;г.
+          </td>
+          <td class="text-center">
+              <a href="{% get_media_prefix %}{{ object.file_path }}" title="{{ object.name}} от {{ object.date|date:"d-m-Y" }} г., размер файла: {{ object.file_size }}"></a>
+          </td>
+          </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    {{ object.text_bottom|safe }}
+  </div>
+</section>
+
+{% endblock %}

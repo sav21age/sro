@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block head %}
+  <title>{{object.head_title}}</title>
+  <meta name="description" content="{{object.meta_description}}">
+{% endblock %} 
+
+{% comment %} {% block h1 %}{{object.title}}{% endblock %} {% endcomment %}
+
+{% block hero_background %}documents-background{% endblock %}
+
+{% block content %}
+
+<section class="news">
+  <div class="container">
+    {% if object.title %}
+    <div class="section-title">
+      <h1>{{object.title}}</h1>
+    </div>
+    {% endif %}
+    
+    {{ object.text_top|safe }}
+    {% include "document-name.html" %}
+    {{ object.text_bottom|safe }}
+
+  </div>
+</section>
+
+{% endblock %}

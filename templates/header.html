@@ -1,0 +1,47 @@
+{% load static navlink %}
+<header class="header">
+  <div class="container-fluid">
+    {% comment %} <nav class="navbar navbar-expand-lg navbar-light sticky-top px-4 px-lg-5 py-lg-0"> {% endcomment %}
+    <nav class="navbar navbar-expand-lg navbar-light px-lg-5 py-lg-0">
+      <a href="/" class="navbar-brand p-0">
+        <img src="{% static 'images/logo.png' %}" alt="Ассоциация «РегионРемМонтаж ПБ»" width="60">
+      </a>
+      <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <div class="py-md-4 ms-auto">  
+            <div class="navbar-nav py-3 py-lg-0">
+              <div class="nav-item dropdown">
+                <button class="nav-link btn dropdown-toggle {% navlink request 'pd_detail, members_list, cf_list, inspection_list, dm_list, reporting_list' %}" data-bs-toggle="dropdown" aria-expanded="false">О партнерстве</button>
+                <div class="dropdown-menu rounded-0 rounded-bottom mt-1 px-1">
+                    <a href="{% url 'pd_detail' %}" class="nav-item nav-link {% navlink request 'pd_detail' %}" itemprop="url">Приоритетные направления</a>
+                    <a href="{% url 'members_list' %}" class="nav-item nav-link {% navlink request 'members_list' %}" itemprop="url">Реестр членов</a>
+                    <a href="{% url 'cf_list' %}" class="nav-item nav-link {% navlink request 'cf_list' %}" itemprop="url">Компенсационный фонд</a>
+                    <a href="{% url 'inspection_list' %}" class="nav-item nav-link {% navlink request 'inspection_list' %}" itemprop="url">Проверка организаций</a>
+                    <a href="{% url 'dm_list' %}" class="nav-item nav-link {% navlink request 'dm_list' %}" itemprop="url">Решения собраний</a>
+                    <a href="{% url 'reporting_list' %}" class="nav-item nav-link {% navlink request 'reporting_list' %}" itemprop="url">Отчетность</a>
+                </div>
+              </div>
+          
+              <a href="{% url 'news_list' %}" class="nav-item nav-link {% navlink request 'news_list' %}" itemprop="url">Новости</a>
+              <a href="{% url 'join_us_detail' %}" class="nav-item nav-link {% navlink request 'join_us_detail' %}" itemprop="url">Вступить в СРО</a>
+
+              <div class="nav-item dropdown">
+                <button class="nav-link btn dropdown-toggle {% navlink request 'tr_list, fl_list, rl_list, lr_list' %}" data-bs-toggle="dropdown" aria-expanded="false">Документы</button>
+                <div class="dropdown-menu rounded-0 rounded-bottom mt-1 px-1">
+                  <a href="{% url 'tr_list' %}" class="nav-item nav-link {% navlink request 'tr_list' %}" itemprop="url">Технические регламенты</a>
+                  <a href="{% url 'fl_list' %}" class="nav-item nav-link {% navlink request 'fl_list' %}" itemprop="url">Федеральные законы</a>
+                  <a href="{% url 'rl_list' %}" class="nav-item nav-link {% navlink request 'rl_list' %}" itemprop="url">Нормативные правовые документы</a>
+                  <a href="{% url 'lr_list' %}" class="nav-item nav-link {% navlink request 'lr_list' %}" itemprop="url">Локальные нормативные акты</a>
+                </div>
+              </div>
+
+              <a href="{% url 'contacts_detail' %}" class="nav-item nav-link {% navlink request 'contacts_detail' %}" itemprop="url">Контакты</a>
+            </div>
+        
+          </div>
+        </div>
+    </nav>
+  </div>
+</header>  

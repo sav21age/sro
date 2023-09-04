@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block head %}
+  <title>{{object.head_title}}</title>
+  <meta name="description" content="{{object.meta_description}}">
+{% endblock %} 
+
+{% comment %} {% block h1 %}{{object.title}}{% endblock %} {% endcomment %}
+
+{% comment %} {% block h1 %}
+{% endblock %} {% endcomment %}
+
+{% block hero_background %}index-background{% endblock %}
+
+{% block content %}
+
+{% with text=object.text title=object.title %}
+{% include "text.html" %}
+{% endwith %}
+
+{% with text=object.struct title='Структура' %}
+{% include "text-secondary.html" %}
+{% endwith %}
+
+{% with text=object.founders title='Учредители' %}
+{% include "text-secondary.html" %}
+{% endwith %}
+
+{% comment %} <div class="section pt-0"> {% endcomment %}
+<section class="secondary">
+  <div class="container">
+    <div class="section-title">
+      <span>Учредительные документы</span>
+    </div>
+    <div class="table-responsive">
+      <table class="table table-borderless table-striped align-middle">
+        <thead>
+        <tr>
+          <th class="col-10">Название</th>
+          <th class="text-center col-2">Файл</th>
+          {% comment %} <th class="text-center col-2">Архив</th> {% endcomment %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for object in founding_document_list %}
+        <tr>
+          <td>
+            {{ object.name }}
+          </td>
+          <td class="text-center">
+            <a href="{% get_media_prefix %}{{ object.file_path }}" title="размер: {{ object.file_size }}"></a>
+          </td>
+          {% comment %} <td class="text-center">
+            <a href="{% get_media_prefix %}{{ object.arc_path }}" title="размер: {{ object.arc_size }}"></a>
+          </td> {% endcomment %}
+        </tr>
+      {% endfor %}
+      </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

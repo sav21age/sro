@@ -1,0 +1,43 @@
+{% extends "base.html" %} 
+{% load static upload_to %} 
+
+{% block head %}
+<title>{{object.head_title}}</title>
+<meta name="description" content="{{object.meta_description}}" />
+{% endblock %} 
+
+{% block hero_background %}reporting-background{% endblock %} 
+
+{% block content %}
+<section>
+  <div class="container">
+    {% if object.title %}
+    <div class="section-title">
+      <h1>{{object.title}}</h1>
+    </div>
+    {% endif %}
+
+    {% with caption='Бухгалтерская отчетность' object_list=object_list|upload_to:'financial-statements' %}
+    {% include 'document-year.html ' %}
+    {% endwith %}
+    <br>
+
+    {% with caption='Аудиторское заключение' object_list=object_list|upload_to:'audit-reports' %}
+    {% include 'document-year.html ' %}
+    {% endwith %}
+    <br>
+
+    {% with caption='Отчет по форме №ОН0001' object_list=object_list|upload_to:'on0001-reports' %}
+    {% include 'document-year.html ' %}
+    {% endwith %}
+    <br>
+
+    {% with caption='Отчет по форме №ОН0002' object_list=object_list|upload_to:'on0002-reports' %}
+    {% include 'document-year.html ' %}
+    {% endwith %}
+
+    {% include 'files.html ' %}
+  </div>
+</section>
+
+{% endblock %}

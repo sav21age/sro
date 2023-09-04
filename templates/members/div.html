@@ -1,0 +1,18 @@
+<div class="row">
+    {% for obj in object_list %}
+    <div class="col-12 mb-3">
+        <div>Рег. № {{ obj.reg_num }}</div>
+        <div>ИНН: {{ obj.inn }}</div>
+        <div>ОГРН: {{ obj.ogrn }}</div>
+        <div>
+            {{ obj.org_form.fullname }} {{obj.company_fullname}} ({{ obj.org_form.shortname }} {{obj.company_shortname}}), {{ obj.location }}
+        </div>
+        <div>
+        {{ obj.position}} {{ obj.lastname }} {{ obj.firstname }} {{ obj.patronymic }}
+        </div>
+        {% if object.excluded_flag %}
+        <div>Дата исключения: {{ obj.excluded_date }}</div>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>

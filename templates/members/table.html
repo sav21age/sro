@@ -1,0 +1,39 @@
+<div class="table-responsive">
+    <table class="table table-borderless table-striped table-responsive align-middle">
+    <thead>
+    <tr>
+        <th>Регистрационный номер</th>
+        <th>Дата регистрации</th>
+        <th>Наименование организации</th>
+        <th>ИНН</th>
+        <th>ОГРН</th>
+        <th>Место нахождения</th>
+        <th>Должность и ФИО руководителя</th>
+        {% if object.excluded_flag %}
+        <th>Дата исключения</th>
+        {% endif %}
+    </tr>
+    </thead>
+    <tbody>
+    {% for obj in object_list %}
+    <tr>
+        <td>{{ obj.reg_num }}</td>
+        <td>{{ obj.reg_date }}</td>
+        <td>
+        {{ obj.org_form.fullname }} {{obj.company_fullname}}<br>
+        ({{ obj.org_form.shortname }} {{obj.company_shortname}})
+        </td>
+        <td>{{ obj.inn }}</td>
+        <td>{{ obj.ogrn }}</td>
+        <td>{{ obj.location }}</td>
+        <td>
+        {{ obj.position}} {{ obj.lastname }} {{ obj.firstname }} {{ obj.patronymic }}
+        </td>
+        {% if object.excluded_flag %}
+        <td>{{ obj.excluded_date }}</td>
+        {% endif %}
+    </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+</div>
