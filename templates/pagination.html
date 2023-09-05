@@ -1,32 +1,10 @@
-{% comment %} <div class="pagination">
-    {% if page_obj.has_previous %}
-        <a href="?{{ page_obj.previous_page_number.querystring }}" class="prev">&lsaquo;&lsaquo; previous</a>
-    {% else %}
-        <span class="disabled prev">&lsaquo;&lsaquo; previous</span>
-    {% endif %}
-    {% for page in page_obj.pages %}
-        {% if page %}
-            {% if page == page_obj.number %}
-                <span class="current page">{{ page }}</span>
-            {% else %}
-                <a href="?{{ page.querystring }}" class="page">{{ page }}</a>
-            {% endif %}
-        {% else %}
-            ...
-        {% endif %}
-    {% endfor %}
-    {% if page_obj.has_next %}
-        <a href="?{{ page_obj.next_page_number.querystring }}" class="next">next &rsaquo;&rsaquo;</a>
-    {% else %}
-        <span class="disabled next">next &rsaquo;&rsaquo;</span>
-    {% endif %}
-</div> {% endcomment %}
-
 {% if is_paginated %}
 <ul class="pagination pagination-circle">
-    <li class="page-item {% if not page_obj.has_previous %}disabled{% endif %}">
+    {% if page_obj.has_previous %}
+    <li class="page-item">
         <a href="?{{ page_obj.previous_page_number.querystring }}" class="page-link">&laquo;</a>
     </li>
+    {% endif %}
     {% for page in page_obj.pages %}
         {% if page %}
             {% if page == page_obj.number %}
@@ -44,8 +22,10 @@
             </li>
         {% endif %}
     {% endfor %}
-    <li class="page-item {% if not page_obj.has_next %}disabled{% endif %}">
-        <a href="?{{ page_obj.next_page_number.querystring }}" class="page-link">&raquo;</a>
-    </li>
+    {% if page_obj.has_next %}
+        <li class="page-item">
+            <a href="?{{ page_obj.next_page_number.querystring }}" class="page-link">&raquo;</a>
+        </li>
+    {% endif %}
 </ul>
 {% endif %}
