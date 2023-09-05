@@ -298,6 +298,10 @@ section, .section {
   background-repeat: no-repeat;
 }
 
+ul.pagination li:before {
+  content: none;
+}
+
 .pagination.pagination-circle .page-item.active .page-link {
   border-radius: 50%;
 }
@@ -395,10 +399,6 @@ a[href$=".xls"]:before, a[href$=".xlsx"]:before {
   font-size: 28px;
   color: #10793F;
   content: "\f1c3";
-}
-
-.news ul li:before {
-  content: none;
 }
 
 :root,

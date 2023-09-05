@@ -2,6 +2,11 @@
 //     border-radius: 50% !important;
 //     // margin: 0 5px;
 // }
+
+ul.pagination li:before {
+  content: none;
+}
+
 .pagination.pagination-circle .page-item.active .page-link {
   border-radius: 50%;
 }
@@ -39,7 +44,7 @@ pagination .page-item .page-link:focus {
   background-color: transparent;
   // font-size: 0.9rem;
   // color: #999;
-  color: $link
+  color: $link;
   // color: var(--secondary);
 }
 .pagination.pagination-circle .page-item .page-link:hover {

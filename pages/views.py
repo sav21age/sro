@@ -1,12 +1,18 @@
 from django.views.generic import DetailView
-from common.mixins import CacheMixin, CacheNewsMixin
-from components.models import Member, News
-from documents.models import CompensationFund, DecisionMeeting, FederalLaw, FoundingDocument, Inspection, LocalRegulation, RegulatoryLegal, Reporting, TechnicalRegulation
-from pages.models import CompensationFundPage, ContactPage, DecisionMeetingPage, FederalLawPage, IndexPage, InspectionPage, JoinUsPage, LocalRegulationPage, MemberExcludedPage, MemberPage, NewsPage, PriorityDirectionPage, RegulatoryLegalPage, ReportingPage, TechnicalRegulationPage
-from pure_pagination.mixins import PaginationMixin
 from django.http import Http404
 from django.views.generic import ListView
 from django.core.exceptions import ObjectDoesNotExist
+from common.mixins import CacheMixin, CacheNewsMixin
+from components.models import Member, News
+from documents.models import (
+    CompensationFund, DecisionMeeting, FederalLaw, FoundingDocument, Inspection,
+    LocalRegulation, RegulatoryLegal, Reporting, TechnicalRegulation)
+from pages.models import (
+    CompensationFundPage, ContactPage, DecisionMeetingPage, FederalLawPage, IndexPage,
+    InspectionPage, JoinUsPage, LocalRegulationPage, MemberExcludedPage, MemberPage,
+    NewsPage, PriorityDirectionPage, RegulatoryLegalPage, ReportingPage,
+    TechnicalRegulationPage)
+from pure_pagination.mixins import PaginationMixin
 
 
 class IndexPageDetail(CacheMixin, DetailView):
@@ -60,8 +66,9 @@ class MemberPageList(CacheMixin, ListView):
 #--
 
 
-class MemberExcludedPageList(CacheMixin, ListView):
+class MemberExcludedPageList(PaginationMixin, CacheMixin, ListView):
     model = Member
+    paginate_by = 10
     template_name = 'members/list.html'
     queryset = Member.is_visible_objects.filter(excluded=True) \
         .select_related('location') \
