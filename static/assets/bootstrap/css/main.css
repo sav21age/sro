@@ -307,19 +307,20 @@ pagination .page-item .page-link:focus {
   -webkit-transition: all 0.3s linear;
   transition: all 0.3s linear;
   border-radius: 0.125rem;
-  background-color: var(--primary);
+  background-color: #689aff;
+  color: #fff;
 }
 
 .pagination.pg-blue .page-item.active .page-link:hover,
 .pagination.pg-blue .page-item.active .page-link:focus {
-  background-color: var(--primary);
+  background-color: #1B5EBE;
 }
 
 .pagination .page-item.active .page-link {
   -webkit-transition: all 0.2s linear;
   transition: all 0.2s linear;
   border-radius: 0.125rem;
-  background-color: var(--primary);
+  background-color: #689aff;
   color: #fff;
 }
 
@@ -329,9 +330,7 @@ pagination .page-item .page-link:focus {
   outline: 0;
   border: 0;
   background-color: transparent;
-  font-size: 0.9rem;
-  color: var(--secondary);
-  font-weight: bold;
+  color: #1B5EBE;
 }
 
 .pagination.pagination-circle .page-item .page-link:hover {

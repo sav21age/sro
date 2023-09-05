@@ -11,20 +11,25 @@ pagination .page-item .page-link:focus {
   transition: all 0.3s linear;
   border-radius: 0.125rem;
   // background-color: #eee;
-  background-color: var(--primary);
+  // background-color: var(--primary);
+  background-color: $footer_bg;
+  color: #fff;
 }
 .pagination.pg-blue .page-item.active .page-link:hover,
 .pagination.pg-blue .page-item.active .page-link:focus {
   // background-color: #BD5410;
-  background-color: var(--primary);
+  // background-color: var(--primary);
+  background-color: $link;
 }
 .pagination .page-item.active .page-link {
   -webkit-transition: all 0.2s linear;
   transition: all 0.2s linear;
   border-radius: 0.125rem;
   // background-color: #BD5410;
-  background-color: var(--primary);
+  // background-color: var(--primary);
+  background-color: $footer_bg;
   color: #fff;
+  // font-weight: bold;
 }
 .pagination .page-item .page-link {
   -webkit-transition: all 0.3s linear;
@@ -32,10 +37,10 @@ pagination .page-item .page-link:focus {
   outline: 0;
   border: 0;
   background-color: transparent;
-  font-size: 0.9rem;
-//   color: #999;
-  color: var(--secondary);
-  font-weight: bold;
+  // font-size: 0.9rem;
+  // color: #999;
+  color: $link
+  // color: var(--secondary);
 }
 .pagination.pagination-circle .page-item .page-link:hover {
   border-radius: 50%;
