@@ -17,7 +17,6 @@
 
 .navbar .navbar-nav > .nav-link,
 .navbar .navbar-nav button {
-  margin-left: 20px;
   font-weight: 500;
   outline: none;
 }
@@ -46,6 +45,22 @@
 .dropdown-menu a:hover {
   color: var(--primary) !important;
 }
+
+
+@media (min-width: 768px) {
+  .navbar .navbar-nav > .nav-link,
+  .navbar .navbar-nav button {
+    margin-left: 15px;
+  }
+}
+
+@media (min-width: 992px) {
+  .navbar .navbar-nav > .nav-link,
+  .navbar .navbar-nav button {
+    margin-left: 20px;
+  }
+}
+
 
 // @media (min-width: 992px) {
 @media (min-width: 768px) {
