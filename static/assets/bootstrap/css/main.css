@@ -5,15 +5,6 @@
   --secondary: #52565e;
 }
 
-header {
-  padding: 5px 0;
-}
-
-@media (min-width: 768px) {
-  header {
-    padding: 15px 0;
-  }
-}
 .footer {
   background: #689aff;
   color: #fff;
@@ -90,6 +81,10 @@ section, .section {
   line-height: 1.2;
 }
 
+.dropdown-menu {
+  padding: 0 4px !important;
+}
+
 .dropdown > .nav-link {
   cursor: default;
 }
@@ -126,6 +121,12 @@ section, .section {
   color: var(--primary) !important;
 }
 
+@media (max-width: 767px) {
+  .navbar .navbar-nav > .nav-link,
+  .navbar .navbar-nav button {
+    margin-left: 5px;
+  }
+}
 @media (min-width: 768px) {
   .navbar .navbar-nav > .nav-link,
   .navbar .navbar-nav button {
