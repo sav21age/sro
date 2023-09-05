@@ -1,10 +1,11 @@
-{% load static upload_to %} 
+{% load static upload_to %}
+<div class="table-responsive">
 <table class="table table-borderless table-striped table-responsive align-middle">
     <thead>
         <tr>
-        <th class="col-10">{{ caption }}</th>
+        <th class="col-8">{{ caption }}</th>
         <th class="text-center col-2">Файл</th>
-        {% comment %} <th class="text-center col-2">Архив</th> {% endcomment %}
+        <th class="text-center col-2">Размер</th>
         </tr>
     </thead>
     <tbody>
@@ -14,12 +15,13 @@
             {{ object.year }} г.
         </td>
         <td class="text-center">
-            <a href="{% get_media_prefix %}{{ object.file_path }}" title="{{ caption }} {{ object.year }} г., размер файла: {{ object.file_size }}"></a>
+            <a href="{% get_media_prefix %}{{ object.file_path }}" title="{{ caption }} {{ object.year }} г."></a>
         </td>
-        {% comment %} <td class="text-center">
-            <a href="{% get_media_prefix %}{{ object.arc_path }}" title="{{ caption }} {{ object.year }} г., размер файла: {{ object.arc_size }}"></a>
-        </td> {% endcomment %}
+        <td class="text-center">
+            <small>{{ object.file_size }}</small>
+        </td>
         </tr>
     {% endfor %}
     </tbody>
 </table>
+</div>

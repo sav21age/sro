@@ -1,10 +1,11 @@
 {% load static %}
+<div class="table-responsive">
 <table class="table table-borderless table-striped table-responsive align-middle">
     <thead>
     <tr>
         <th class="col-8">Название</th>
         <th class="text-center col-2">Файл</th>
-        {% comment %} <th class="text-center col-2">Архив</th> {% endcomment %}
+        <th class="text-center col-2">Размер</th>
     </tr>
 </thead>
 <tbody>
@@ -14,12 +15,14 @@
         {{ object.name }}
     </td>
     <td class="text-center">
-        <a href="{% get_media_prefix %}{{ object.file_path }}" title="{{ object.name }}, размер файла: {{ object.file_size }}"></a>
+        {% comment %} <a href="{% get_media_prefix %}{{ object.file_path }}" title="{{ object.name }}"><small>{{ object.file_size }}</small></a> {% endcomment %}
+        <a href="{% get_media_prefix %}{{ object.file_path }}" title="{{ object.name }}"></a>
     </td>
-    {% comment %} <td class="text-center">
-        <a href="{% get_media_prefix %}{{ object.arc_path }}" title="{{ object.name }}, размер файла: {{ object.arc_size }}"></a>
-    </td> {% endcomment %}
+    <td class="text-center">
+        <small>{{ object.file_size }}</small>
+    </td>
     </tr>
 {% endfor %}
 </tbody>
 </table>
+</div>
