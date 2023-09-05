@@ -30,7 +30,6 @@
 
   {% compress css %}
   <link type="text/css" href="{% static 'assets/bootstrap/css/main.css' %}" rel="stylesheet" media="screen">
-  <link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet">
   {% endcompress %}
 </head>
 <body class="d-flex flex-column h-100">
@@ -60,11 +59,8 @@
   <!-- Back to Top -->
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="fas fa-chevron-up"></i></a>
   {% include 'footer.html' %}
-  <!-- Yandex.Metrika counter -->
-  <!-- /Yandex.Metrika counter -->
   {% compress js %}
   <script src="{% static 'assets/bootstrap/js/bundle.js' %}"></script>
-  <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
   <script src="{% static 'assets/js/main.js' %}"></script>
   {% endcompress %}
 </body>

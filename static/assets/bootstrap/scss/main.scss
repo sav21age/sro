@@ -1,18 +1,10 @@
 @import "_variables";
-// @import "_mixins";
 @import "_header";
 @import "_footer";
 @import "_sections";
-// @import "_line";
 @import "_navbar";
-// @import "_social";
-// @import "_portfolio";
 @import "_backtotop";
 @import "_hero";
-// @import "_callback";
-// @import "_range";
-// @import "_cards";
-// @import "_contacts";
 @import "_pagination";
 @import "_files";
 @import "_news";
@@ -84,28 +76,6 @@ ul.files li:before{
   content: none;
 }
 
-// li:before {
-//   content: '\f111';
-//   font-family: 'Font Awesome 5 Free';
-//   font-size: 8px;
-//   font-weight: 700;
-//   float: left;
-//   margin-left: -2em;
-//   margin-top: 7px;
-//   color: var(--primary);
-// }
-
-// ul li ul li:before {
-//   content: '\f0c8';
-//   font-family: 'Font Awesome 5 Free';
-//   font-size: 8px;
-//   font-weight: 700;
-//   float: left;
-//   margin-left: -2em;
-//   margin-top: 7px;
-//   color: var(--primary);
-// }
-
 @mixin list_awesome{
   font-family: 'Font Awesome 5 Free';
   font-size: 5px;
@@ -130,36 +100,14 @@ th, strong{
   font-weight: 500!important;
 }
 a {
-  // color: #689aff;
   color: $link;
   text-decoration: none;
-  // border-bottom: 1px dashed rgba(var(--bs-link-color-rgb), var(--bs-link-opacity, 1));
 }
 
 .icon-primary{
-  // color: $link;
   color: var(--primary);
 }
 
 .divider{
   margin-top: 15px;
 }
-
-// a {
-//   color: var(--primary);
-//   text-decoration: none;
-// }
-
-// a:hover {
-//   color: #ffc732;
-//   text-decoration: none;
-// }
-
-
-// h1{
-//   text-transform: uppercase;
-// }
-
-// .grecaptcha-badge { 
-//     visibility: hidden;
-// }

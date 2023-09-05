@@ -14,7 +14,8 @@ a[href$='.pdf']:before{
 a[href$='.zip']:before,
 a[href$='.7z']:before{
   @include file-extension;
-  color: #FDA12B;
+  color: var(--primary);
+  // color: #FDA12B;
   content: "\f1c6";
 }
 
