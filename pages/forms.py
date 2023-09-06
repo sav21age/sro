@@ -1,8 +1,12 @@
-from django import forms
-from common.forms import SimplePageAdminForm, TextPageAdminForm
-from pages.models import CompensationFundPage, ContactPage, DecisionMeetingPage, FederalLawPage, IndexPage, InspectionPage, JoinUsPage, LocalRegulationPage, MemberPage, PriorityDirectionPage, RegulatoryLegalPage, ReportingPage, TechnicalRegulationPage
 from ckeditor.widgets import CKEditorWidget
 from codemirror import CodeMirrorTextarea
+from django import forms
+from common.forms import SimplePageAdminForm, TextPageAdminForm
+from pages.models import (
+    CompensationFundPage, ContactPage, DecisionMeetingPage, FederalLawPage,
+    IndexPage, InspectionPage, JoinUsPage, LocalRegulationPage, MemberPage,
+    PriorityDirectionPage, RegulatoryLegalPage, ReportingPage,
+    TechnicalRegulationPage)
 
 
 codemirror_widget = CodeMirrorTextarea(

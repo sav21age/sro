@@ -29,9 +29,9 @@ class SimplePageAdmin(admin.ModelAdmin):
     form = SimplePageAdminForm
     formfield_overrides = formfield_overrides
     fieldsets = (
-        ('', {
-            'fields': ('is_visible',)
-        }),
+        # ('', {
+        #     'fields': ('is_visible',)
+        # }),
         ('Мета теги страницы и заголовок', {
             'fields': ('head_title', 'meta_description', 'title',)
         }),

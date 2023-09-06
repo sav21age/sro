@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.contrib.sitemaps.views import sitemap
 from django.contrib.auth import views as auth_views
 from django.conf import settings
-from pages.sitemap import (
+from pages.sitemaps import (
     CompensationFundSitemap, ContactSitemap, DecisionMeetingSitemap, FederalLawSitemap, 
     IndexSitemap, InspectionSitemap, JoinUsSitemap, LocalRegulationSitemap, MemberSitemap,
     NewsSitemap, PriorityDirectionSitemap, RegulatoryLegalSitemap, ReportingSitemap,

@@ -23,7 +23,7 @@ class IndexPageDetail(CacheMixin, DetailView):
     template_name = 'index/index.html'
 
     def get_object(self, queryset=None):
-        return IndexPage.is_visible_objects.get()
+        return IndexPage.objects.get()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -43,9 +43,10 @@ class PriorityDirectionPageDetail(CacheMixin, DetailView):
     template_name = 'priority-directions/detail.html'
 
     def get_object(self, queryset=None):
-        return PriorityDirectionPage.is_visible_objects.get()
+        return PriorityDirectionPage.objects.get()
 
 #--
+
 
 class MemberPageList(CacheMixin, ListView):
     model = Member
@@ -53,14 +54,15 @@ class MemberPageList(CacheMixin, ListView):
     queryset = Member.is_visible_objects.filter(excluded=False) \
         .select_related('location') \
         .select_related('position') \
-        .select_related('org_form')
+        .select_related('org_form') \
+        .all()
 
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
         try:
-            context['object'] = MemberPage.is_visible_objects.get()
+            context['object'] = MemberPage.objects.get()
         except ObjectDoesNotExist:
             raise Http404
 
@@ -76,14 +78,14 @@ class MemberExcludedPageList(PaginationMixin, CacheMixin, ListView):
     queryset = Member.is_visible_objects.filter(excluded=True) \
         .select_related('location') \
         .select_related('position') \
-        .select_related('org_form')
-
+        .select_related('org_form') \
+        .all()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
         try:
-            context['object'] = MemberExcludedPage.is_visible_objects.get()
+            context['object'] = MemberExcludedPage.objects.get()
         except ObjectDoesNotExist:
             raise Http404
         
@@ -103,7 +105,7 @@ class CompensationFundPageList(CacheMixin, ListView):
         context = super().get_context_data(**kwargs)
 
         try:
-            context['object'] = CompensationFundPage.is_visible_objects.get()
+            context['object'] = CompensationFundPage.objects.get()
         except ObjectDoesNotExist:
             raise Http404
 
@@ -121,7 +123,7 @@ class InspectionPageList(CacheMixin, ListView):
         context = super().get_context_data(**kwargs)
 
         try:
-            context['object'] = InspectionPage.is_visible_objects.get()
+            context['object'] = InspectionPage.objects.get()
         except ObjectDoesNotExist:
             raise Http404
 
@@ -139,7 +141,7 @@ class DecisionMeetingPageList(CacheMixin, ListView):
         context = super().get_context_data(**kwargs)
 
         try:
-            context['object'] = DecisionMeetingPage.is_visible_objects.get()
+            context['object'] = DecisionMeetingPage.objects.get()
         except ObjectDoesNotExist:
             raise Http404
 
@@ -151,15 +153,13 @@ class DecisionMeetingPageList(CacheMixin, ListView):
 class ReportingPageList(CacheMixin, ListView):
     model = Reporting
     template_name = 'reporting/list.html'
-
-    def get_object(self, queryset=None):
-        return Reporting.is_visible_objects.get()
+    queryset = Reporting.is_visible_objects.all()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
         try:
-            context['object'] = ReportingPage.is_visible_objects\
+            context['object'] = ReportingPage.objects\
                 .prefetch_related(
                     Prefetch(
                     'files',
@@ -179,7 +179,7 @@ class NewsPageList(PaginationMixin, CacheNewsMixin, ListView):
     model = News
     paginate_by = settings.PAGINATE_BY['NEWS']
     template_name = 'news/list.html'
-    # queryset = News.is_visible_objects.prefetch_related('files')
+    # queryset = News.objects.prefetch_related('files')
     queryset = News.is_visible_objects.prefetch_related(
         Prefetch(
             'files',
@@ -192,7 +192,7 @@ class NewsPageList(PaginationMixin, CacheNewsMixin, ListView):
         context = super().get_context_data(**kwargs)
 
         try:
-            context['object'] = NewsPage.is_visible_objects.get()
+            context['object'] = NewsPage.objects.get()
         except ObjectDoesNotExist:
             raise Http404
 
@@ -206,7 +206,7 @@ class JoinUsPageDetail(CacheMixin, DetailView):
     template_name = 'join-us/detail.html'
 
     def get_object(self, queryset=None):
-        return JoinUsPage.is_visible_objects \
+        return JoinUsPage.objects \
             .prefetch_related(
                 Prefetch(
                     'files',
@@ -221,15 +221,13 @@ class JoinUsPageDetail(CacheMixin, DetailView):
 class TechnicalRegulationPageList(CacheMixin, ListView):
     model = TechnicalRegulation
     template_name = 'technical-regulations/list.html'
-
-    # def get_object(self, queryset=None):
-    #     return Reporting.is_visible_objects.get()
+    queryset = TechnicalRegulation.is_visible_objects.all()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
         try:
-            context['object'] = TechnicalRegulationPage.is_visible_objects.get()
+            context['object'] = TechnicalRegulationPage.objects.get()
         except ObjectDoesNotExist:
             raise Http404
 
@@ -241,15 +239,13 @@ class TechnicalRegulationPageList(CacheMixin, ListView):
 class FederalLawPageList(CacheMixin, ListView):
     model = FederalLaw
     template_name = 'federal-laws/list.html'
-
-    # def get_object(self, queryset=None):
-    #     return Reporting.is_visible_objects.get()
+    queryset = FederalLaw.is_visible_objects.all()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
         try:
-            context['object'] = FederalLawPage.is_visible_objects.get()
+            context['object'] = FederalLawPage.objects.get()
         except ObjectDoesNotExist:
             raise Http404
 
@@ -261,15 +257,13 @@ class FederalLawPageList(CacheMixin, ListView):
 class RegulatoryLegalPageList(CacheMixin, ListView):
     model = RegulatoryLegal
     template_name = 'regulatory-legal/list.html'
-
-    # def get_object(self, queryset=None):
-    #     return Reporting.is_visible_objects.get()
+    queryset = RegulatoryLegal.is_visible_objects.all()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
         try:
-            context['object'] = RegulatoryLegalPage.is_visible_objects.get()
+            context['object'] = RegulatoryLegalPage.objects.get()
         except ObjectDoesNotExist:
             raise Http404
 
@@ -280,15 +274,13 @@ class RegulatoryLegalPageList(CacheMixin, ListView):
 class LocalRegulationPageList(CacheMixin, ListView):
     model = LocalRegulation
     template_name = 'local-regulation/list.html'
-
-    # def get_object(self, queryset=None):
-    #     return Reporting.is_visible_objects.get()
+    queryset = LocalRegulation.is_visible_objects.all()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
         try:
-            context['object'] = LocalRegulationPage.is_visible_objects.get()
+            context['object'] = LocalRegulationPage.objects.get()
         except ObjectDoesNotExist:
             raise Http404
 
@@ -300,12 +292,6 @@ class LocalRegulationPageList(CacheMixin, ListView):
 class ContactPageDetail(CacheMixin, DetailView):
     model = ContactPage
     template_name = 'contacts/detail.html'
-    # .select_related('brand')\
-    # .prefetch_related('brand__images')\
-    # .prefetch_related('features')
-
-    # def get_queryset(self):
-    #     return IndexPage.is_visible_objects.get()
 
     def get_object(self, queryset=None):
-        return ContactPage.is_visible_objects.get()
+        return ContactPage.objects.get()

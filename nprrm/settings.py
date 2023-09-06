@@ -120,16 +120,31 @@ STATICFILES_FINDERS = [
 
 #--
 
-CODEMIRROR_PATH = '/assets/codemirror'
 CODEMIRROR_PATH = "codemirror"
 CODEMIRROR_MODE = "htmlmixed"
 
 #--
 
 CKEDITOR_CONFIGS = {
-    "default": {
-        "removePlugins": "image",
-    }
+    # "default": {
+    #     'toolbar': 'Basic',
+    #     # "removePlugins": "image",
+    #     # 'height': 700,
+    #     'width': '700',
+    # }
+    'default': {
+        'toolbar': [
+            [
+             '-', 'Format',
+             'Undo', 'Redo',
+             '-', 'Bold', 'Italic', 'Underline',
+             '-', 'Link', 'Unlink',
+             '-', 'Maximize',
+            ],
+        ],  
+        # 'width': 900,
+        # 'toolbarCanCollapse': True,
+    },
 }
 
 #--

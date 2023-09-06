@@ -8,7 +8,7 @@ from common.helpers import (
 
 
 class SimplePage(models.Model):
-    is_visible = models.BooleanField('показывать?', default=1, db_index=True)
+    # is_visible = models.BooleanField('показывать?', default=1, db_index=True)
 
     head_title = models.CharField('title', max_length=80)
     meta_description = models.CharField('meta description', max_length=160)
@@ -19,8 +19,8 @@ class SimplePage(models.Model):
     created_at = models.DateTimeField('дата создания', auto_now_add=True)
     updated_at = models.DateTimeField('дата обновления', auto_now=True)
 
-    objects = models.Manager()
-    is_visible_objects = IsVisibleManager()
+    # objects = models.Manager()
+    # is_visible_objects = IsVisibleManager()
 
     def __str__(self):
         return self.title

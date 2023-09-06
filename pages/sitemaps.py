@@ -26,7 +26,7 @@ class PriorityDirectionSitemap(Sitemap):
 
     def items(self):
         # return ['priority-directions']
-        return PriorityDirectionPage.is_visible_objects.order_by('id').all()
+        return PriorityDirectionPage.objects.order_by('id').all()
 
     def location(self, item):
         return reverse('pd_detail')
@@ -39,7 +39,7 @@ class CompensationFundSitemap(Sitemap):
 
     def items(self):
         # return ['compensation-fund',]
-        return CompensationFundPage.is_visible_objects.order_by('id').all()
+        return CompensationFundPage.objects.order_by('id').all()
 
     def location(self, item):
         return reverse('cf_list')
@@ -52,7 +52,7 @@ class MemberSitemap(Sitemap):
 
     def items(self):
         # return ['members',]
-        return MemberPage.is_visible_objects.order_by('id').all()
+        return MemberPage.objects.order_by('id').all()
 
     def location(self, item):
         return reverse('members_list')
@@ -65,7 +65,7 @@ class InspectionSitemap(Sitemap):
 
     def items(self):
         # return ['inspection',]
-        return InspectionPage.is_visible_objects.order_by('id').all()
+        return InspectionPage.objects.order_by('id').all()
 
     def location(self, item):
         return reverse('inspection_list')
@@ -78,7 +78,7 @@ class DecisionMeetingSitemap(Sitemap):
 
     def items(self):
         # return ['decision-meetings',]
-        return DecisionMeetingPage.is_visible_objects.order_by('id').all()
+        return DecisionMeetingPage.objects.order_by('id').all()
 
     def location(self, item):
         return reverse('dm_list')
@@ -91,7 +91,7 @@ class ReportingSitemap(Sitemap):
 
     def items(self):
         # return ['reporting',]
-        return ReportingPage.is_visible_objects.order_by('id').all()
+        return ReportingPage.objects.order_by('id').all()
 
     def location(self, item):
         return reverse('reporting_list')
@@ -103,7 +103,7 @@ class NewsSitemap(Sitemap):
     priority = 0.5
 
     def items(self):
-        qs = News.is_visible_objects.order_by('id').all()
+        qs = News.objects.order_by('id').all()
         paginator = Paginator(qs, settings.PAGINATE_BY['NEWS'])
         return paginator.page_range
 
@@ -121,7 +121,7 @@ class JoinUsSitemap(Sitemap):
 
     def items(self):
         # return ['join-us',]
-        return JoinUsPage.is_visible_objects.order_by('id').all()
+        return JoinUsPage.objects.order_by('id').all()
 
     def location(self, item):
         return reverse('join_us_detail')
@@ -134,7 +134,7 @@ class TechnicalRegulationSitemap(Sitemap):
 
     def items(self):
         # return ['technical-regulations',]
-        return TechnicalRegulationPage.is_visible_objects.order_by('id').all()
+        return TechnicalRegulationPage.objects.order_by('id').all()
 
     def location(self, item):
         return reverse('tr_list')
@@ -147,7 +147,7 @@ class FederalLawSitemap(Sitemap):
 
     def items(self):
         # return ['federal-laws',]
-        return FederalLawPage.is_visible_objects.order_by('id').all()
+        return FederalLawPage.objects.order_by('id').all()
 
     def location(self, item):
         return reverse('fl_list')
@@ -160,7 +160,7 @@ class RegulatoryLegalSitemap(Sitemap):
 
     def items(self):
         # return ['regulatory-legal',]
-        return RegulatoryLegalPage.is_visible_objects.order_by('id').all()
+        return RegulatoryLegalPage.objects.order_by('id').all()
 
     def location(self, item):
         return reverse('rl_list')
@@ -173,7 +173,7 @@ class LocalRegulationSitemap(Sitemap):
 
     def items(self):
         # return ['local-regulation',]
-        return LocalRegulationPage.is_visible_objects.order_by('id').all()
+        return LocalRegulationPage.objects.order_by('id').all()
 
     def location(self, item):
         return reverse('lr_list')
@@ -186,7 +186,7 @@ class ContactSitemap(Sitemap):
 
     def items(self):
         # return ['contacts',]
-        return ContactPage.is_visible_objects.order_by('id').all()
+        return ContactPage.objects.order_by('id').all()
 
     def location(self, item):
         return reverse('contacts_detail')
