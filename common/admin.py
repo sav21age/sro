@@ -1,5 +1,5 @@
-from django.contrib import admin
 from pathlib import Path
+from django.contrib import admin
 from common.forms import SimplePageAdminForm
 from common.helpers import convert_bytes, formfield_overrides
 # from zipfile import ZipFile
@@ -85,8 +85,13 @@ class FilePathAdmin(admin.ModelAdmin):
 
         if 'file_path' in form.changed_data:
             if obj.file_path.path:
-                size = Path(obj.file_path.path).stat().st_size
-                obj.file_size = convert_bytes(size)
+                try:
+                    size = Path(obj.file_path.path).stat().st_size
+                    size = convert_bytes(size)
+                except FileNotFoundError:
+                    size = 0
+
+                obj.file_size = size
 
         super().save_model(request, obj, form, change)
 
@@ -97,7 +102,7 @@ class DocumentNameAdmin(FilePathAdmin):
 
 class DocumentYearAdmin(FilePathAdmin):
     list_display = ('year',)
-    
-    
+
+
 class DocumentDateAdmin(FilePathAdmin):
     list_display = ('date',)
