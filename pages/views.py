@@ -160,8 +160,13 @@ class ReportingPageList(CacheMixin, ListView):
 
         try:
             context['object'] = ReportingPage.is_visible_objects\
-                .prefetch_related('files') \
-                .get()
+                .prefetch_related(
+                    Prefetch(
+                    'files',
+                    queryset=File.is_visible_objects.all(),
+                    to_attr='is_visible_files'
+                    )
+                ).get()
         except ObjectDoesNotExist:
             raise Http404
 
@@ -202,8 +207,13 @@ class JoinUsPageDetail(CacheMixin, DetailView):
 
     def get_object(self, queryset=None):
         return JoinUsPage.is_visible_objects \
-            .prefetch_related('files') \
-            .get()
+            .prefetch_related(
+                Prefetch(
+                    'files',
+                    queryset=File.is_visible_objects.all(),
+                    to_attr='is_visible_files'
+                )
+            ).get()
 
 #--
 
