@@ -2,6 +2,7 @@ from django.views.generic import DetailView
 from django.http import Http404
 from django.views.generic import ListView
 from django.core.exceptions import ObjectDoesNotExist
+from django.conf import settings
 from common.mixins import CacheMixin, CacheNewsMixin
 from components.models import Member, News
 from documents.models import (
@@ -41,7 +42,7 @@ class PriorityDirectionPageDetail(CacheMixin, DetailView):
 
     def get_object(self, queryset=None):
         return PriorityDirectionPage.is_visible_objects.get()
-    
+
 #--
 
 class MemberPageList(CacheMixin, ListView):
@@ -68,7 +69,7 @@ class MemberPageList(CacheMixin, ListView):
 
 class MemberExcludedPageList(PaginationMixin, CacheMixin, ListView):
     model = Member
-    paginate_by = 10
+    paginate_by = settings.PAGINATE_BY['DEFAULT']
     template_name = 'members/list.html'
     queryset = Member.is_visible_objects.filter(excluded=True) \
         .select_related('location') \
@@ -163,13 +164,13 @@ class ReportingPageList(CacheMixin, ListView):
             raise Http404
 
         return context
-    
+
 #--
 
 
 class NewsPageList(PaginationMixin, CacheNewsMixin, ListView):
     model = News
-    paginate_by = 7
+    paginate_by = settings.PAGINATE_BY['NEWS']
     template_name = 'news/list.html'
     queryset = News.is_visible_objects.prefetch_related('files')
 

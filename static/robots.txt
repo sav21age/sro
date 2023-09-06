@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /admin
+Disallow: /privacy-policy
+Disallow: /members/excluded
+
+Host: https://nprrm.ru
+Sitemap: https://nprrm.ru/sitemap.xml

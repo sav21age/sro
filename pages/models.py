@@ -30,6 +30,13 @@ class PriorityDirectionPage(SimplePage, SingletonModel):
 
 # --
 
+class CompensationFundPage(SimplePage, TextPage, SingletonModel):
+    class Meta:
+        verbose_name = 'компенсационный фонд'
+        verbose_name_plural = 'компенсационные фонды'
+
+# --
+
 
 class MemberPage(SimplePage, TextPage, SingletonModel):
     class Meta:
@@ -47,12 +54,6 @@ class MemberExcludedPage(SimplePage, TextPage, SingletonModel):
 # --
 
 
-class CompensationFundPage(SimplePage, TextPage, SingletonModel):
-    class Meta:
-        verbose_name = 'компенсационный фонд'
-        verbose_name_plural = 'компенсационные фонды'
-
-# --
 
 
 class InspectionPage(SimplePage, TextPage, SingletonModel):

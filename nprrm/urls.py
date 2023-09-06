@@ -1,12 +1,21 @@
 from django.contrib import admin
 from django.urls import include, path
 from django.views.generic import TemplateView
-from nprrm import settings
-from pages.sitemap import CompensationFundSitemap, ContactSitemap, DecisionMeetingSitemap, FederalLawSitemap, IndexSitemap, InspectionSitemap, JoinUsSitemap, LocalRegulationSitemap, MemberPageSitemap, NewsSitemap, PriorityDirectionSitemap, RegulatoryLegalSitemap, ReportingSitemap, TechnicalRegulationSitemap
-from pages.views import CompensationFundPageList, ContactPageDetail, DecisionMeetingPageList, FederalLawPageList, IndexPageDetail, InspectionPageList, JoinUsPageDetail, LocalRegulationPageList, MemberExcludedPageList, MemberPageList, NewsPageList, PriorityDirectionPageDetail, RegulatoryLegalPageList, ReportingPageList, TechnicalRegulationPageList
 from django.shortcuts import render
 from django.contrib.sitemaps.views import sitemap
 from django.contrib.auth import views as auth_views
+from django.conf import settings
+from pages.sitemap import (
+    CompensationFundSitemap, ContactSitemap, DecisionMeetingSitemap, FederalLawSitemap, 
+    IndexSitemap, InspectionSitemap, JoinUsSitemap, LocalRegulationSitemap, MemberSitemap,
+    NewsSitemap, PriorityDirectionSitemap, RegulatoryLegalSitemap, ReportingSitemap,
+    TechnicalRegulationSitemap)
+from pages.views import (
+    CompensationFundPageList, ContactPageDetail, DecisionMeetingPageList, FederalLawPageList,
+    IndexPageDetail, InspectionPageList, JoinUsPageDetail, LocalRegulationPageList,
+    MemberExcludedPageList, MemberPageList, NewsPageList, PriorityDirectionPageDetail,
+    RegulatoryLegalPageList, ReportingPageList, TechnicalRegulationPageList)
+
 
 admin.site.site_header = admin.site.site_title = 'Ассоциация «РегионРемМонтаж ПБ»'
 
@@ -15,7 +24,7 @@ admin.site.site_header = admin.site.site_title = 'Ассоциация «Рег�
 sitemaps = {
     'index': IndexSitemap,
     'pd': PriorityDirectionSitemap,
-    'members': MemberPageSitemap,
+    'members': MemberSitemap,
     'cf': CompensationFundSitemap,
     'inspection': InspectionSitemap,
     'dm': DecisionMeetingSitemap,
