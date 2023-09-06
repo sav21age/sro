@@ -7,6 +7,7 @@ from django.dispatch import receiver
 from django.db.models.signals import post_save
 from common.helpers import replace_quotes
 from common.managers import IsVisibleManager
+from common.validators import IsNumericValidator
 from files.models import File
 
 
@@ -66,25 +67,30 @@ class News(models.Model):
 
     class Meta:
         unique_together = ('date', 'description',)
-        ordering= ('-date', )
+        ordering = ('-date', )
         verbose_name = 'новость'
         verbose_name_plural = 'новости'
 
-#--
+# --
 
 
 class Member(models.Model):
     is_visible = models.BooleanField('показывать?', default=1, db_index=True)
-    
-    reg_num = models.CharField('рег. №', unique=True, db_index=True, max_length=25)
+
+    reg_num = models.CharField(
+        'рег. №', unique=True, db_index=True, max_length=25)
     reg_date = models.DateField('дата регистрации')
-    inn = models.CharField('ИНН', max_length=12, unique=True, db_index=True, validators=[MinLengthValidator(10)])
-    ogrn = models.CharField('ОГРН', max_length=13, unique=True, db_index=True, validators=[MinLengthValidator(13)])
+    inn = models.CharField('ИНН', max_length=12, unique=True, db_index=True, validators=[
+                           MinLengthValidator(10), IsNumericValidator])
+    ogrn = models.CharField('ОГРН', max_length=13, unique=True, db_index=True, validators=[
+                            MinLengthValidator(13), IsNumericValidator])
 
     # city = models.ForeignKey(City, verbose_name='город', on_delete=models.CASCADE)
-    location = models.ForeignKey(Location, verbose_name='место нахождения', on_delete=models.CASCADE)
-    
-    org_form = models.ForeignKey(OrgForm, verbose_name='форма организации', on_delete=models.CASCADE)
+    location = models.ForeignKey(
+        Location, verbose_name='место нахождения', on_delete=models.CASCADE)
+
+    org_form = models.ForeignKey(
+        OrgForm, verbose_name='форма организации', on_delete=models.CASCADE)
     company_fullname = models.CharField(
         'полное название компании', max_length=250, blank=True, db_index=True,
         help_text='например: "Самая Лучшая Компания"',
@@ -93,13 +99,15 @@ class Member(models.Model):
         'сокращенное название компании', max_length=250, blank=True, db_index=True,
         help_text='например: "СЛК"',
     )
-    position = models.ForeignKey(Position, verbose_name='должность', blank=True, null=True, on_delete=models.CASCADE)
+    position = models.ForeignKey(
+        Position, verbose_name='должность', blank=True, null=True, on_delete=models.CASCADE)
     lastname = models.CharField('фамилия', max_length=100, db_index=True)
     firstname = models.CharField('имя', max_length=100)
     patronymic = models.CharField('отчество', max_length=100)
 
     # founder = models.BooleanField('учредитель ассоциации', default=False, blank=True)
-    excluded = models.BooleanField('исключен из ассоциации?', default=False, db_index=True)
+    excluded = models.BooleanField(
+        'исключен из ассоциации?', default=False, db_index=True)
     excluded_date = models.DateField('дата исключения', blank=True, null=True)
     # excluded_decision = models.ForeignKey(DecisionMeeting, verbose_name='исключен решением собрания', blank=True, null=True, on_delete=models.CASCADE)
 
@@ -131,13 +139,14 @@ class Member(models.Model):
         msg_required = 'Обязательное поле.'
         if self.excluded:
             # if not self.excluded_date and not self.excluded_decision:
-                # raise ValidationError({
-                #     'excluded_date': ValidationError(msg_required, code='required'),
-                #     'excluded_decision': ValidationError(msg_required, code='required'),
-                # })
+            # raise ValidationError({
+            #     'excluded_date': ValidationError(msg_required, code='required'),
+            #     'excluded_decision': ValidationError(msg_required, code='required'),
+            # })
 
             if not self.excluded_date:
-                raise ValidationError({'excluded_date': msg_required}, code='required')
+                raise ValidationError(
+                    {'excluded_date': msg_required}, code='required')
 
             # if not self.excluded_decision:
             #     raise ValidationError({'excluded_decision': msg_required}, code='required')
@@ -150,26 +159,28 @@ class Member(models.Model):
             #     })
 
             if self.excluded_date:
-                raise ValidationError({'excluded_date': msg_excluded}, code='required')
+                raise ValidationError(
+                    {'excluded_date': msg_excluded}, code='required')
 
             # self.excluded_date = None
             # self.excluded_decision = None
 
         if self.company_fullname and not self.company_shortname:
-            raise ValidationError({'company_shortname': msg_required}, code='required')
+            raise ValidationError(
+                {'company_shortname': msg_required}, code='required')
 
         if self.company_shortname and not self.company_fullname:
-            raise ValidationError({'company_fullname': msg_required}, code='required')
+            raise ValidationError(
+                {'company_fullname': msg_required}, code='required')
 
         super().clean()
-    
+
     class Meta:
         ordering = ('reg_num', )
         verbose_name = 'член ассоциации'
         verbose_name_plural = 'члены ассоциации'
 
-
-#--
+# --
 
 
 @receiver(post_save, sender=Location)
@@ -177,7 +188,6 @@ class Member(models.Model):
 @receiver(post_save, sender=OrgForm)
 @receiver(post_save, sender=News)
 @receiver(post_save, sender=Member)
-
 def cache_invalidate(instance, **kwargs):
     if kwargs.get('raw'):  # add for test, pass fixtures
         return

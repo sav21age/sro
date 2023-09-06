@@ -1,14 +1,14 @@
 import os
 from django.http import HttpResponse
+from django.conf import settings
 import reportlab
-# from reportlab.rl_config import TTFSearchPath
 from reportlab.lib.pagesizes import A4, landscape
+from reportlab.lib.units import inch
 from reportlab.platypus import SimpleDocTemplate, Table, Paragraph, TableStyle
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.lib import colors
-from nprrm.settings import BASE_DIR
 
 
 def export_to_pdf(filename, title, data, table_col_widths):
@@ -30,7 +30,7 @@ def export_to_pdf(filename, title, data, table_col_widths):
     s['Heading1'].fontName = fontName
     s['Heading1'].alignment = 1
 
-    reportlab.rl_config.TTFSearchPath.append(os.path.join(BASE_DIR, 'static', 'fonts'))
+    reportlab.rl_config.TTFSearchPath.append(os.path.join(settings.BASE_DIR, 'static', 'fonts'))
     pdfmetrics.registerFont(TTFont('Times New Roman Cyr', 'timesnrcyrmt.ttf'))
     pdfmetrics.registerFont(TTFont('Times New Roman Cyr Bold', 'timesnrcyrmt_bold.ttf'))
 
@@ -61,7 +61,7 @@ def export_to_pdf(filename, title, data, table_col_widths):
         ('INNERGRID', (0,0), (-1,-1), 0.25, colors.black),
         ('BOX', (0,0), (-1,-1), 0.25, colors.black),
     ])
-    
+    table_col_widths[:] = [x * inch for x in table_col_widths]
     t = Table(data, table_col_widths)
     t.setStyle(table_style)
 

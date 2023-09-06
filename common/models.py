@@ -1,10 +1,10 @@
-import re
 from datetime import datetime
 from django.db import models
-from common.managers import IsVisibleManager
-from common.helpers import get_doc_date_file_path, get_doc_name_file_path, get_doc_year_file_path, quote, quote_office
 from django.core.validators import FileExtensionValidator
-from common.helpers import document_extensions
+from common.managers import IsVisibleManager
+from common.helpers import (
+    get_doc_date_file_path, get_doc_name_file_path, get_doc_year_file_path,
+    replace_quotes, document_extensions)
 
 
 class SimplePage(models.Model):
@@ -26,15 +26,9 @@ class SimplePage(models.Model):
         return self.title
 
     def clean(self):
-        self.head_title = re.sub(quote, r"«\1»", self.head_title)
-        self.head_title = re.sub(quote_office, r"«\1»", self.head_title)
-        self.meta_description = re.sub(quote, r"«\1»", self.meta_description)
-        self.meta_description = re.sub(
-            quote_office, r"«\1»", self.meta_description)
-
-        self.title = re.sub(quote, r"«\1»", self.title)
-        self.title = re.sub(quote_office, r"«\1»", self.title)
-
+        self.head_title = replace_quotes(self.head_title)
+        self.meta_description = replace_quotes(self.meta_description)
+        self.title = replace_quotes(self.title)
         super().clean()
 
     class Meta:

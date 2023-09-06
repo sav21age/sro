@@ -9,29 +9,38 @@ from transliterate import translit
 
 formfield_overrides = {
     models.CharField: {'widget': TextInput(attrs={'style': 'width: 50%;'})},
-    models.TextField: {'widget': Textarea(attrs={'rows': 30, 'style': 'width: 70%; font-size: 115%;'})},
+    models.TextField: {'widget': Textarea(
+        attrs={'rows': 30, 'style': 'width: 70%; font-size: 115%;'})
+    },
     models.IntegerField: {'widget': NumberInput(attrs={'style': 'width: 100px;'})},
     models.DecimalField: {'widget': NumberInput(attrs={'style': 'width: 100px;'})},
     models.ForeignKey: {'widget': Select(attrs={'style': 'width: 250px;'})},
 }
 
-document_extensions = ('doc', 'docx', 'xls', 'xlsx', 'rtf', 'pdf', 'zip', '7z', 'rar', )
+document_extensions = ('doc', 'docx', 'xls', 'xlsx',
+                       'rtf', 'pdf', 'zip', '7z', 'rar', )
 
-quote = re.compile(r'\"(.*?)\"')
-quote_office = re.compile(r'\“(.*?)\”')
+quote_double = re.compile(r'\"(.*?)\"')
+quote_triple = re.compile(r'\"(.*?)\"(.*?)\"')
 
 def replace_quotes(value):
     s = value.replace("'", '"').replace("“", '"').replace("”", '"')
-    res = s.split('"')[1:]
+    count = s.count('"')
+    if count == 2:
+        return re.sub(quote_double, r"«\1»", s)
+    elif count == 3:
+        return re.sub(quote_triple, r"«\1«\2»", s)
 
-    if len(res) > 1:
-        res.pop()
-        if len(res) == 1:
-            return f"«{res[0]}»"
-        elif len(res) == 2:
-            return f"«{res[0]}«{res[1]}»"
+    # res = s.split('"')[1:]
+    # if len(res) > 1:
+    #     res.pop()
+    #     if len(res) == 1:
+    #         return f"«{res[0]}»"
+    #     elif len(res) == 2:
+    #         return f"«{res[0]}«{res[1]}»"
 
-    return value
+    # return value
+    return s
 
 
 def get_image_path(instance, filename):
@@ -78,21 +87,9 @@ def get_doc_name_file_path(instance, filename):
     return f"{fol}/{stem}{suffix}"
 
 
-# #TODO: remove
-# def get_year_file_path(instance, filename):
-#     dir, stem, suffix = get_path_params(instance, filename)
-#     return f"{dir}/{stem}{suffix}"
-
-
 def get_doc_year_file_path(instance, filename):
     fol, stem, suffix = get_path_params(instance, filename)
     return f"{fol}/{stem}{suffix}"
-
-
-# #Todo: remove
-# def get_date_file_path(instance, filename):
-#     dir, stem, suffix = get_path_params(instance, filename)
-#     return f"{dir}/{instance.date}_{stem}{suffix}"
 
 
 def get_doc_date_file_path(instance, filename):

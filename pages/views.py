@@ -2,12 +2,14 @@ from django.views.generic import DetailView
 from django.http import Http404
 from django.views.generic import ListView
 from django.core.exceptions import ObjectDoesNotExist
+from django.db.models import Prefetch
 from django.conf import settings
 from common.mixins import CacheMixin, CacheNewsMixin
 from components.models import Member, News
 from documents.models import (
     CompensationFund, DecisionMeeting, FederalLaw, FoundingDocument, Inspection,
     LocalRegulation, RegulatoryLegal, Reporting, TechnicalRegulation)
+from files.models import File
 from pages.models import (
     CompensationFundPage, ContactPage, DecisionMeetingPage, FederalLawPage, IndexPage,
     InspectionPage, JoinUsPage, LocalRegulationPage, MemberExcludedPage, MemberPage,
@@ -172,7 +174,14 @@ class NewsPageList(PaginationMixin, CacheNewsMixin, ListView):
     model = News
     paginate_by = settings.PAGINATE_BY['NEWS']
     template_name = 'news/list.html'
-    queryset = News.is_visible_objects.prefetch_related('files')
+    # queryset = News.is_visible_objects.prefetch_related('files')
+    queryset = News.is_visible_objects.prefetch_related(
+        Prefetch(
+            'files',
+            queryset=File.is_visible_objects.all(),
+            to_attr='is_visible_files'
+        )
+    )
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
