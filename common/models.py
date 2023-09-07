@@ -128,7 +128,7 @@ class DocumentDate(models.Model):
     is_visible_objects = IsVisibleManager()
 
     def __str__(self):
-        return f"{self.name} от {self.date}"
+        return f'{self.name} от {self.date.strftime("%d.%m.%Y")} г.'
         
     class Meta:
         abstract = True

@@ -27,14 +27,19 @@ class CompensationFundAdmin(DocumentNameAdmin):
 @admin.register(Inspection)
 class InspectionAdmin(DocumentYearAdmin):
     form = InspectionAdminForm
+
 # --
 
 
 @admin.register(DecisionMeeting)
 class DecisionMeetingAdmin(DocumentDateAdmin):
     form = DecisionMeetingAdminForm
-    list_display = ('date', 'name',)
-    # formfield_overrides = formfield_overrides
+    list_display = ('get_date', 'name',)
+
+    @admin.display(description='дата')
+    def get_date(self, obj=None):
+        return f'{obj.date.strftime("%d.%m.%Y")} г.'
+    get_date.admin_order_field = 'date'
 
 #--
 
