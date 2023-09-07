@@ -131,7 +131,7 @@ class MemberAdmin(admin.ModelAdmin):
                 f"{obj.position.name} {obj.lastname} {obj.firstname} {obj.patronymic}")
             data.append(row)
 
-        table_col_widths = (1.7, 0.95, 2.65, 0.9, 1.1, 1.5, 2.0) #in inch
+        table_col_widths = [1.7, 0.95, 2.65, 0.9, 1.1, 1.5, 2.0] #in inch
 
         return export_to_pdf("registry-of-members.pdf", title, data, table_col_widths)
 
@@ -164,6 +164,6 @@ class MemberAdmin(admin.ModelAdmin):
             row.append(obj.excluded_date.strftime("%d.%m.%Y"))
             data.append(row)
 
-        table_col_widths = (1.7, 0.95, 2.25, 0.9, 1.1, 1.5, 1.4, 1.0)
+        table_col_widths = [1.7, 0.95, 2.25, 0.9, 1.1, 1.5, 1.4, 1.0] #in inch
 
         return export_to_pdf("registry-of-excluded-members.pdf", title, data, table_col_widths)
