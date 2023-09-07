@@ -1,8 +1,8 @@
 from django.db import models
 from django.core.cache import cache
-from django.dispatch import receiver
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, post_delete
 from common.models import DocumentDate, DocumentName, DocumentYear
+from common.signals import receiver_multiple
 
 
 class FoundingDocument(DocumentName):
@@ -13,7 +13,7 @@ class FoundingDocument(DocumentName):
         verbose_name = 'учредительный документ'
         verbose_name_plural = 'учредительные документы'
 
-#--
+# --
 
 
 class CompensationFund(DocumentName):
@@ -24,7 +24,7 @@ class CompensationFund(DocumentName):
         verbose_name = 'документы компенсационного фонда'
         verbose_name_plural = 'документы компенсационного фонда'
 
-#--
+# --
 
 
 class Inspection(DocumentYear):
@@ -38,11 +38,12 @@ class Inspection(DocumentYear):
             models.UniqueConstraint(fields=('year',), name='unique year')
         ]
 
-#--
+# --
+
 
 class DecisionMeeting(DocumentDate):
     upload_to = 'decision-meetings'
-        
+
     class Meta:
         ordering = ('-date', '-id', )
         unique_together = ('date', 'name',)
@@ -50,6 +51,7 @@ class DecisionMeeting(DocumentDate):
         verbose_name_plural = 'решения собраний'
 
 # --
+
 
 class Reporting(DocumentYear):
     CHOICES = (
@@ -60,14 +62,15 @@ class Reporting(DocumentYear):
         ('on0002-reports', 'Отчет по форме №ОН0002'),
     )
     # purpose = models.CharField(null=True, blank=True)
-    upload_to = models.CharField('тип документа', max_length=30, choices=CHOICES)
+    upload_to = models.CharField(
+        'тип документа', max_length=30, choices=CHOICES)
 
     class Meta:
         ordering = ('-year',)
         unique_together = ('year', 'upload_to',)
         verbose_name = 'отчетность'
         verbose_name_plural = 'отчетность'
-       
+
 # --
 
 
@@ -112,19 +115,16 @@ class LocalRegulation(DocumentName):
         verbose_name = 'локальный нормативный акт'
         verbose_name_plural = 'локальные нормативные акты'
 
-#--
+# --
 
 
-@receiver(post_save, sender=FoundingDocument)
-@receiver(post_save, sender=CompensationFund)
-@receiver(post_save, sender=Inspection)
-@receiver(post_save, sender=DecisionMeeting)
-@receiver(post_save, sender=Reporting)
-@receiver(post_save, sender=TechnicalRegulation)
-@receiver(post_save, sender=FederalLaw)
-@receiver(post_save, sender=RegulatoryLegal)
-@receiver(post_save, sender=LocalRegulation)
-
+senders = [
+    FoundingDocument, CompensationFund, Inspection, DecisionMeeting,
+    Reporting, TechnicalRegulation, FederalLaw, RegulatoryLegal, 
+    LocalRegulation,
+]
+@receiver_multiple(post_save, senders)
+@receiver_multiple(post_delete, senders)
 def cache_invalidate(instance, **kwargs):
     if kwargs.get('raw'):  # add for test, pass fixtures
         return

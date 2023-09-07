@@ -4,7 +4,7 @@ from django.views.generic import ListView
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Prefetch
 from django.conf import settings
-from common.mixins import CacheMixin, CacheNewsMixin
+from common.mixins import CacheMixin
 from components.models import Member, News
 from documents.models import (
     CompensationFund, DecisionMeeting, FederalLaw, FoundingDocument, Inspection,
@@ -175,7 +175,7 @@ class ReportingPageList(CacheMixin, ListView):
 #--
 
 
-class NewsPageList(PaginationMixin, CacheNewsMixin, ListView):
+class NewsPageList(PaginationMixin, CacheMixin, ListView):
     model = News
     paginate_by = settings.PAGINATE_BY['NEWS']
     template_name = 'news/list.html'

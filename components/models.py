@@ -3,10 +3,10 @@ from django.contrib.contenttypes import fields
 from django.core.validators import MinLengthValidator
 from django.core.exceptions import ValidationError
 from django.core.cache import cache
-from django.dispatch import receiver
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, post_delete
 from common.helpers import replace_quotes
 from common.managers import IsVisibleManager
+from common.signals import receiver_multiple
 from common.validators import IsNumericValidator
 from files.models import File
 
@@ -183,13 +183,11 @@ class Member(models.Model):
 # --
 
 
-@receiver(post_save, sender=Location)
-@receiver(post_save, sender=Position)
-@receiver(post_save, sender=OrgForm)
-@receiver(post_save, sender=News)
-@receiver(post_save, sender=Member)
+senders = [Location, Position, OrgForm, News, Member]
+@receiver_multiple(post_save, senders)
+@receiver_multiple(post_delete, senders)
 def cache_invalidate(instance, **kwargs):
-    if kwargs.get('raw'):  # add for test, pass fixtures
+    if kwargs.get('raw'): # add for test, pass fixtures
         return
 
     cache.clear()

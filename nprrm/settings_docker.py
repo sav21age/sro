@@ -54,10 +54,10 @@ CACHES = {
         'BACKEND': CACHE_BACKEND,
         'TIMEOUT': CACHE_TIMEOUT,
     },
-    'news': {
-        'BACKEND': CACHE_BACKEND,
-        'TIMEOUT': CACHE_TIMEOUT,
-    },
+    # 'news': {
+    #     'BACKEND': CACHE_BACKEND,
+    #     'TIMEOUT': CACHE_TIMEOUT,
+    # },
     'axes': {
         'BACKEND': CACHE_BACKEND,
     },

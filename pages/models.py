@@ -1,10 +1,10 @@
 from django.db import models
 from django.contrib.contenttypes import fields
 from django.core.cache import cache
-from django.dispatch import receiver
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, post_delete
 from solo.models import SingletonModel
 from files.models import File
+from common.signals import receiver_multiple
 from common.models import SimplePage, TextPage
 
 
@@ -30,6 +30,7 @@ class PriorityDirectionPage(SimplePage, SingletonModel):
 
 # --
 
+
 class CompensationFundPage(SimplePage, TextPage, SingletonModel):
     class Meta:
         verbose_name = 'компенсационный фонд'
@@ -52,8 +53,6 @@ class MemberExcludedPage(SimplePage, TextPage, SingletonModel):
         verbose_name_plural = 'реестр исключенных членов ассоциации'
 
 # --
-
-
 
 
 class InspectionPage(SimplePage, TextPage, SingletonModel):
@@ -153,21 +152,14 @@ class ContactPage(SimplePage, SingletonModel):
 # --
 
 
-@receiver(post_save, sender=IndexPage)
-@receiver(post_save, sender=PriorityDirectionPage)
-@receiver(post_save, sender=MemberPage)
-@receiver(post_save, sender=MemberExcludedPage)
-@receiver(post_save, sender=CompensationFundPage)
-@receiver(post_save, sender=InspectionPage)
-@receiver(post_save, sender=DecisionMeetingPage)
-@receiver(post_save, sender=ReportingPage)
-@receiver(post_save, sender=NewsPage)
-@receiver(post_save, sender=JoinUsPage)
-@receiver(post_save, sender=TechnicalRegulationPage)
-@receiver(post_save, sender=FederalLawPage)
-@receiver(post_save, sender=RegulatoryLegalPage)
-@receiver(post_save, sender=LocalRegulationPage)
-@receiver(post_save, sender=ContactPage)
+senders = [
+    IndexPage, PriorityDirectionPage, MemberPage, MemberExcludedPage,
+    CompensationFundPage, InspectionPage, DecisionMeetingPage,
+    ReportingPage, NewsPage, JoinUsPage, TechnicalRegulationPage, FederalLawPage,
+    RegulatoryLegalPage, LocalRegulationPage, ContactPage,
+]
+@receiver_multiple(post_save, senders)
+@receiver_multiple(post_delete, senders)
 def cache_invalidate(instance, **kwargs):
     if kwargs.get('raw'):  # add for test, pass fixtures
         return
