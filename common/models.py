@@ -74,7 +74,7 @@ class DocumentName(models.Model):
 
 
 YEAR_CHOICES = []
-for r in range(2015, (datetime.now().year+1)):
+for r in range(2015, (datetime.now().year+2)):
     YEAR_CHOICES.append((r, r))
 YEAR_CHOICES.reverse()
 
