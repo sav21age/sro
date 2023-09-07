@@ -2,7 +2,12 @@
 {% block extrahead %}
 <style>
 .django-ckeditor-widget{
-    width: 85%;
+    @media (min-width: 992px) {
+        width: 85%;
+    }
+    @media (max-width: 991px) {
+        width: 100%;
+    }
 }
 </style>
 {% endblock %}
