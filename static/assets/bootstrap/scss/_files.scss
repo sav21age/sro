@@ -35,7 +35,8 @@ a[href$='.rtf']:before{
   @include file-extension;
   color: #83b4dd;
   // content: "\f1c3";
-  content: "\f15b";
+  // content: "\f15b";
+  content: "\f15c";
 }
 
 a[href$='.xls']:before, a[href$='.xlsx']:before{

@@ -390,7 +390,7 @@ a[href$=".rtf"]:before {
   margin-right: 8px;
   font-size: 28px;
   color: #83b4dd;
-  content: "\f15b";
+  content: "\f15c";
 }
 
 a[href$=".xls"]:before, a[href$=".xlsx"]:before {
