@@ -28,8 +28,11 @@ class PriorityDirectionSitemap(Sitemap):
         # return ['priority-directions']
         return PriorityDirectionPage.objects.order_by('id').all()
 
+    def lastmod(self, obj):
+        return obj.updated_at
+
     def location(self, item):
-        return reverse('pd_detail')
+        return reverse('p-d_detail')
 
 #--
 
@@ -42,7 +45,7 @@ class CompensationFundSitemap(Sitemap):
         return CompensationFundPage.objects.order_by('id').all()
 
     def location(self, item):
-        return reverse('cf_list')
+        return reverse('c-f_list')
 
 #--
 
@@ -81,7 +84,7 @@ class DecisionMeetingSitemap(Sitemap):
         return DecisionMeetingPage.objects.order_by('id').all()
 
     def location(self, item):
-        return reverse('dm_list')
+        return reverse('d-m_list')
 
 #--
 
@@ -103,7 +106,7 @@ class NewsSitemap(Sitemap):
     priority = 0.5
 
     def items(self):
-        qs = News.objects.order_by('id').all()
+        qs = News.is_visible_objects.order_by('id').all()
         paginator = Paginator(qs, settings.PAGINATE_BY['NEWS'])
         return paginator.page_range
 
@@ -123,8 +126,11 @@ class JoinUsSitemap(Sitemap):
         # return ['join-us',]
         return JoinUsPage.objects.order_by('id').all()
 
+    def lastmod(self, obj):
+        return obj.updated_at
+
     def location(self, item):
-        return reverse('join_us_detail')
+        return reverse('j-u_detail')
 
 #--
 
@@ -137,7 +143,7 @@ class TechnicalRegulationSitemap(Sitemap):
         return TechnicalRegulationPage.objects.order_by('id').all()
 
     def location(self, item):
-        return reverse('tr_list')
+        return reverse('t-r_list')
 
 #--
 
@@ -150,7 +156,7 @@ class FederalLawSitemap(Sitemap):
         return FederalLawPage.objects.order_by('id').all()
 
     def location(self, item):
-        return reverse('fl_list')
+        return reverse('f-l_list')
 
 #--
 
@@ -163,7 +169,7 @@ class RegulatoryLegalSitemap(Sitemap):
         return RegulatoryLegalPage.objects.order_by('id').all()
 
     def location(self, item):
-        return reverse('rl_list')
+        return reverse('r-l_list')
 
 #--
 
@@ -176,7 +182,7 @@ class LocalRegulationSitemap(Sitemap):
         return LocalRegulationPage.objects.order_by('id').all()
 
     def location(self, item):
-        return reverse('lr_list')
+        return reverse('l-r_list')
 
 #--
 
@@ -188,5 +194,8 @@ class ContactSitemap(Sitemap):
         # return ['contacts',]
         return ContactPage.objects.order_by('id').all()
 
+    def lastmod(self, obj):
+        return obj.updated_at
+
     def location(self, item):
-        return reverse('contacts_detail')
+        return reverse('contact_detail')

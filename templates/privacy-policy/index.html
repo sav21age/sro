@@ -5,16 +5,15 @@
   <meta name="description" content="политика конфиденциальности">
 {% endblock %} 
 
-{% block h1 %}
-Политика конфиденциальности
-{% endblock %}
-
 {% block hero_background %}privacy-policy-background{% endblock %}
 
 {% block content %}
 {% with email="nprrm@yandex.ru" host="https://nprrm.ru" %}
 <div class="section">
 <div class="container">
+<div class="section-title">
+<h1>Политика конфиденциальности</h1>
+</div>
 <p>Политика в отношении обработки персональных данных</p>
 <p>
   1. Общие положения Настоящая политика обработки персональных данных составлена
@@ -215,7 +214,7 @@
 <p>
   8.3. Актуальная версия Политики в свободном доступе расположена в сети
   Интернет по адресу
-  <a href="{{host}}/privacy-policy/">{{host}}/privacy-policy/</a>.
+  <a href="{% url 'p-p_template' %}">{{host}}/privacy-policy/</a>.
 </p>
 </div>
 </div>

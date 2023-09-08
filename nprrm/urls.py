@@ -23,18 +23,18 @@ admin.site.site_header = admin.site.site_title = 'Ассоциация «Рег�
 
 sitemaps = {
     'index': IndexSitemap,
-    'pd': PriorityDirectionSitemap,
+    'p-d': PriorityDirectionSitemap,
     'members': MemberSitemap,
-    'cf': CompensationFundSitemap,
+    'c-f': CompensationFundSitemap,
     'inspection': InspectionSitemap,
-    'dm': DecisionMeetingSitemap,
+    'd-m': DecisionMeetingSitemap,
     'reporting': ReportingSitemap,
     'news': NewsSitemap,
-    'join-us': JoinUsSitemap,
-    'tr': TechnicalRegulationSitemap,
-    'fl': FederalLawSitemap,
-    'rl': RegulatoryLegalSitemap,
-    'lr': LocalRegulationSitemap,
+    'j-u': JoinUsSitemap,
+    't-r': TechnicalRegulationSitemap,
+    'f-l': FederalLawSitemap,
+    'r-l': RegulatoryLegalSitemap,
+    'l-r': LocalRegulationSitemap,
     'contacts': ContactSitemap,
 }
 
@@ -46,25 +46,25 @@ urlpatterns = [
     
     path('', IndexPageDetail.as_view(), name='index'),
 
-    path('priority-directions/', PriorityDirectionPageDetail.as_view(), name='pd_detail'),
+    path('priority-directions/', PriorityDirectionPageDetail.as_view(), name='p-d_detail'),
     path('members/', MemberPageList.as_view(), name='members_list'),
     path('members/excluded/', MemberExcludedPageList.as_view(), name='members_excluded_list'),
-    path('compensation-fund/', CompensationFundPageList.as_view(), name='cf_list'),
+    path('compensation-fund/', CompensationFundPageList.as_view(), name='c-f_list'),
     path('inspection/', InspectionPageList.as_view(), name='inspection_list'),
-    path('decision-meetings/', DecisionMeetingPageList.as_view(), name='dm_list'),
+    path('decision-meetings/', DecisionMeetingPageList.as_view(), name='d-m_list'),
     path('reporting/', ReportingPageList.as_view(), name='reporting_list'),
     path('news/', NewsPageList.as_view(), name='news_list'),
-    path('join-us/', JoinUsPageDetail.as_view(), name='join_us_detail'),
+    path('join-us/', JoinUsPageDetail.as_view(), name='j-u_detail'),
 
-    path('technical-regulations/', TechnicalRegulationPageList.as_view(), name='tr_list'),
-    path('federal-laws/', FederalLawPageList.as_view(), name='fl_list'),
-    path('regulatory-legal/', RegulatoryLegalPageList.as_view(), name='rl_list'),
-    path('local-regulation/', LocalRegulationPageList.as_view(), name='lr_list'),
+    path('technical-regulations/', TechnicalRegulationPageList.as_view(), name='t-r_list'),
+    path('federal-laws/', FederalLawPageList.as_view(), name='f-l_list'),
+    path('regulatory-legal/', RegulatoryLegalPageList.as_view(), name='r-l_list'),
+    path('local-regulation/', LocalRegulationPageList.as_view(), name='l-r_list'),
 
-    path('contacts/', ContactPageDetail.as_view(), name='contacts_detail'),
+    path('contacts/', ContactPageDetail.as_view(), name='contact_detail'),
     
     path('privacy-policy/', TemplateView.as_view(
-        template_name="privacy-policy/index.html"), name="privacy-policy"),
+        template_name="privacy-policy/index.html"), name="p-p_template"),
     
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
          name='django.contrib.sitemaps.views.sitemap'),

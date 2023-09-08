@@ -14,31 +14,31 @@
           <div class="ms-auto">  
             <div class="navbar-nav py-2 py-md-0">
               <div class="nav-item dropdown">
-                <button class="nav-link btn dropdown-toggle {% navlink request 'pd_detail, members_list, cf_list, inspection_list, dm_list, reporting_list' %}" data-bs-toggle="dropdown" aria-expanded="false">О партнерстве</button>
+                <button class="nav-link btn dropdown-toggle {% navlink request 'p-d_detail, members_list, c-f_list, inspection_list, d-m_list, reporting_list' %}" data-bs-toggle="dropdown" aria-expanded="false">О партнерстве</button>
                 <div class="dropdown-menu rounded-0 rounded-bottom mt-md-1 px-2 px-md-1">
-                    <a href="{% url 'pd_detail' %}" class="nav-item nav-link {% navlink request 'pd_detail' %}" itemprop="url">Приоритетные направления</a>
+                    <a href="{% url 'p-d_detail' %}" class="nav-item nav-link {% navlink request 'p-d_detail' %}" itemprop="url">Приоритетные направления</a>
                     <a href="{% url 'members_list' %}" class="nav-item nav-link {% navlink request 'members_list' %}" itemprop="url">Реестр членов</a>
-                    <a href="{% url 'cf_list' %}" class="nav-item nav-link {% navlink request 'cf_list' %}" itemprop="url">Компенсационный фонд</a>
+                    <a href="{% url 'c-f_list' %}" class="nav-item nav-link {% navlink request 'c-f_list' %}" itemprop="url">Компенсационный фонд</a>
                     <a href="{% url 'inspection_list' %}" class="nav-item nav-link {% navlink request 'inspection_list' %}" itemprop="url">Проверка организаций</a>
-                    <a href="{% url 'dm_list' %}" class="nav-item nav-link {% navlink request 'dm_list' %}" itemprop="url">Решения собраний</a>
+                    <a href="{% url 'd-m_list' %}" class="nav-item nav-link {% navlink request 'd-m_list' %}" itemprop="url">Решения собраний</a>
                     <a href="{% url 'reporting_list' %}" class="nav-item nav-link {% navlink request 'reporting_list' %}" itemprop="url">Отчетность</a>
                 </div>
               </div>
           
               <a href="{% url 'news_list' %}" class="nav-item nav-link {% navlink request 'news_list' %}" itemprop="url">Новости</a>
-              <a href="{% url 'join_us_detail' %}" class="nav-item nav-link {% navlink request 'join_us_detail' %}" itemprop="url">Вступить в СРО</a>
+              <a href="{% url 'j-u_detail' %}" class="nav-item nav-link {% navlink request 'j-u_detail' %}" itemprop="url">Вступить в СРО</a>
 
               <div class="nav-item dropdown">
-                <button class="nav-link btn dropdown-toggle {% navlink request 'tr_list, fl_list, rl_list, lr_list' %}" data-bs-toggle="dropdown" aria-expanded="false">Документы</button>
+                <button class="nav-link btn dropdown-toggle {% navlink request 't-r_list, f-l_list, r-l_list, l-r_list' %}" data-bs-toggle="dropdown" aria-expanded="false">Документы</button>
                 <div class="dropdown-menu rounded-0 rounded-bottom mt-md-1 px-2 px-md-1">
-                  <a href="{% url 'tr_list' %}" class="nav-item nav-link {% navlink request 'tr_list' %}" itemprop="url">Технические регламенты</a>
-                  <a href="{% url 'fl_list' %}" class="nav-item nav-link {% navlink request 'fl_list' %}" itemprop="url">Федеральные законы</a>
-                  <a href="{% url 'rl_list' %}" class="nav-item nav-link {% navlink request 'rl_list' %}" itemprop="url">Нормативные правовые документы</a>
-                  <a href="{% url 'lr_list' %}" class="nav-item nav-link {% navlink request 'lr_list' %}" itemprop="url">Локальные нормативные акты</a>
+                  <a href="{% url 't-r_list' %}" class="nav-item nav-link {% navlink request 't-r_list' %}" itemprop="url">Технические регламенты</a>
+                  <a href="{% url 'f-l_list' %}" class="nav-item nav-link {% navlink request 'f-l_list' %}" itemprop="url">Федеральные законы</a>
+                  <a href="{% url 'r-l_list' %}" class="nav-item nav-link {% navlink request 'r-l_list' %}" itemprop="url">Нормативные правовые документы</a>
+                  <a href="{% url 'l-r_list' %}" class="nav-item nav-link {% navlink request 'l-r_list' %}" itemprop="url">Локальные нормативные акты</a>
                 </div>
               </div>
 
-              <a href="{% url 'contacts_detail' %}" class="nav-item nav-link {% navlink request 'contacts_detail' %}" itemprop="url">Контакты</a>
+              <a href="{% url 'contact_detail' %}" class="nav-item nav-link {% navlink request 'contact_detail' %}" itemprop="url">Контакты</a>
             </div>
         
           </div>

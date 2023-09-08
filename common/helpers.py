@@ -1,6 +1,4 @@
-import os
 import re
-import uuid
 from pathlib import Path
 from django.forms import NumberInput, Select, TextInput, Textarea
 from django.db import models
@@ -17,51 +15,48 @@ formfield_overrides = {
     models.ForeignKey: {'widget': Select(attrs={'style': 'width: 250px;'})},
 }
 
+#--
+
 document_extensions = ('doc', 'docx', 'xls', 'xlsx',
                        'rtf', 'pdf', 'zip', '7z', 'rar', )
+
+#--
 
 quote_double = re.compile(r'\"(.*?)\"')
 quote_triple = re.compile(r'\"(.*?)\"(.*?)\"')
 
 def replace_quotes(value):
     s = value.replace("'", '"').replace("“", '"').replace("”", '"')
-    count = s.count('"')
-    if count == 2:
+    c = s.count('"')
+    if c == 2:
         return re.sub(quote_double, r"«\1»", s)
-    elif count == 3:
+    elif c == 3:
         return re.sub(quote_triple, r"«\1«\2»", s)
 
-    # res = s.split('"')[1:]
-    # if len(res) > 1:
-    #     res.pop()
-    #     if len(res) == 1:
-    #         return f"«{res[0]}»"
-    #     elif len(res) == 2:
-    #         return f"«{res[0]}«{res[1]}»"
-
-    # return value
     return s
 
+#--
 
-def get_image_path(instance, filename):
-    f = os.path.splitext(filename)
-    fol = 'images'
-    if hasattr(instance, 'upload_image_to'):
-        fol = f'{fol}/{instance.upload_image_to}'
-    return f'{fol}/{uuid.uuid1().hex}{f[1].lower()}'
+def convert_bytes(num):
+    """
+    Convert bytes to KB... MB... GB... etc
+    """
+    for x in ['Б', 'КБ', 'МБ', 'ГБ', 'ТБ']:
+        if num < 1024.0:
+            # return "%3.1f %s" % (num, x)
+            return f"{num:.1f} {x}"
+        num /= 1024.0
 
+#--
 
-# def get_file_path(instance, filename):
+# def get_image_path(instance, filename):
 #     f = os.path.splitext(filename)
-#     dir = 'files'
-#     if hasattr(instance, 'upload_to'):
-#         dir = '{0}/{1}'.format(dir, instance.upload_to)
-#     return '{0}/{1}{2}'.format(dir, uuid.uuid1().hex, f[1].lower())
+#     fol = 'images'
+#     if hasattr(instance, 'upload_image_to'):
+#         fol = f'{fol}/{instance.upload_image_to}'
+#     return f'{fol}/{uuid.uuid1().hex}{f[1].lower()}'
 
-# import re
-# s = "Свидетельство о государственной регистрации Ассоциации «РегионРемМонтаж ПБ» в Минюсте."
-# s = re.sub("[^a-zA-Zа-яА-Я0-9 ]+", "", s)
-# print(s)
+#--
 
 def get_path_params(instance, filename):
     stem = Path(filename).stem
@@ -95,13 +90,3 @@ def get_doc_year_file_path(instance, filename):
 def get_doc_date_file_path(instance, filename):
     fol, stem, suffix = get_path_params(instance, filename)
     return f"{fol}/{instance.date}_{stem}{suffix}"
-
-
-def convert_bytes(num):
-    """
-    this function will convert bytes to MB.... GB... etc
-    """
-    for x in ['Б', 'КБ', 'МБ', 'ГБ', 'ТБ']:
-        if num < 1024.0:
-            return "%3.1f %s" % (num, x)
-        num /= 1024.0

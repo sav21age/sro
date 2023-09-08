@@ -7,10 +7,3 @@ class CacheMixin(object):
     @method_decorator(cache_page(settings.CACHE_TIMEOUT))
     def dispatch(self, *args, **kwargs):
         return super().dispatch(*args, **kwargs)
-
-
-# class CacheNewsMixin(object):
-#     @method_decorator(cache_page(settings.CACHE_TIMEOUT, cache="news"))
-#     def dispatch(self, *args, **kwargs):
-#         return super().dispatch(*args, **kwargs)
-    
