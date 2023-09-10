@@ -2,8 +2,11 @@
 {% load static %}
 
 {% block head %}
-  <title>{{object.head_title}}</title>
-  <meta name="description" content="{{object.meta_description}}">
+  <title>{{ object.head_title }}</title>
+  <meta name="description" content="{{ object.meta_description }}">
+  <meta property="og:title" content="{{ object.head_title }}">
+  <meta property="og:description" content="{{ object.meta_description }}">
+  <meta property="og:url" content="{{host}}{% url 'f-l_list' %}">
 {% endblock %} 
 
 {% comment %} {% block h1 %}{{object.title}}{% endblock %} {% endcomment %}

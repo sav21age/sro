@@ -164,7 +164,7 @@ class ReportingPageList(CacheMixin, ListView):
                     Prefetch(
                     'files',
                     queryset=File.is_visible_objects.all(),
-                    to_attr='is_visible_files'
+                    # to_attr='is_visible_files'
                     )
                 ).get()
         except ObjectDoesNotExist:
@@ -184,7 +184,7 @@ class NewsPageList(PaginationMixin, CacheMixin, ListView):
         Prefetch(
             'files',
             queryset=File.is_visible_objects.all(),
-            to_attr='is_visible_files'
+            # to_attr='is_visible_files'
         )
     )
 
@@ -211,7 +211,7 @@ class JoinUsPageDetail(CacheMixin, DetailView):
                 Prefetch(
                     'files',
                     queryset=File.is_visible_objects.all(),
-                    to_attr='is_visible_files'
+                    # to_attr='is_visible_files'
                 )
             ).get()
 

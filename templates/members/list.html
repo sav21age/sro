@@ -2,10 +2,15 @@
 {% load static %}
 
 {% block head %}
-  <title>{{object.head_title}}</title>
-  <meta name="description" content="{{object.meta_description}}">
+  <title>{{ object.head_title }}</title>
+  <meta name="description" content="{{ object.meta_description }}">
+  <meta property="og:title" content="{{ object.head_title }}">
+  <meta property="og:description" content="{{ object.meta_description }}">
   {% if object.excluded_flag %}
-  <meta name="robots" content="noindex">
+    <meta property="og:url" content="{{host}}{% url 'members_excluded_list' %}">
+    <meta name="robots" content="noindex">
+  {% else %}
+    <meta property="og:url" content="{{host}}{% url 'members_list' %}">
   {% endif %}
 {% endblock %} 
 

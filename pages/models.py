@@ -158,8 +158,8 @@ senders = [
     ReportingPage, NewsPage, JoinUsPage, TechnicalRegulationPage, FederalLawPage,
     RegulatoryLegalPage, LocalRegulationPage, ContactPage,
 ]
-@receiver_multiple(post_save, senders)
-@receiver_multiple(post_delete, senders)
+signal = [post_save, post_delete,]
+@receiver_multiple(signal, senders)
 def cache_invalidate(instance, **kwargs):
     if kwargs.get('raw'):  # add for test, pass fixtures
         return

@@ -2,8 +2,11 @@
 {% load static %} 
 
 {% block head %}
-<title>{{object.head_title}}</title>
-<meta name="description" content="{{object.meta_description}}">
+  <title>{{ object.head_title }}</title>
+  <meta name="description" content="{{ object.meta_description }}">
+  <meta property="og:title" content="{{ object.head_title }}">
+  <meta property="og:description" content="{{ object.meta_description }}">
+  <meta property="og:url" content="{{host}}{% url 'p-d_detail' %}">
 {% endblock %} 
 
 {% block hero_background %}priority-directions-background{% endblock %} 

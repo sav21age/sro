@@ -1,7 +1,7 @@
 {% load static %} 
 {% if object.is_visible_files %}
 <ul class="ps-0 mb-0 files">
-    {% for file in object.is_visible_files %}
+    {% for file in object.files.all %}
     <li><a href="{% get_media_prefix %}{{ file.path }}" title="{{ file.name }}">{{ file.name }}</a></li>
     {% endfor %}
 </ul>

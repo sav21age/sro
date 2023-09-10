@@ -2,7 +2,10 @@
 
 {% block head %}
   <title>Политика конфиденциальности</title>
-  <meta name="description" content="политика конфиденциальности">
+  <meta name="description" content="Политика конфиденциальности">
+  <meta property="og:title" content="Политика конфиденциальности">
+  <meta property="og:description" content="Политика конфиденциальности">
+  <meta property="og:url" content="{{host}}{% url 'p-p_template' %}">
 {% endblock %} 
 
 {% block hero_background %}privacy-policy-background{% endblock %}
