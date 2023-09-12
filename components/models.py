@@ -80,9 +80,9 @@ class Member(models.Model):
     reg_num = models.CharField(
         'рег. №', unique=True, db_index=True, max_length=25)
     reg_date = models.DateField('дата регистрации')
-    inn = models.CharField('ИНН', max_length=12, unique=True, db_index=True, validators=[
+    inn = models.CharField('ИНН', max_length=12, db_index=True, validators=[
                            MinLengthValidator(10), IsNumericValidator])
-    ogrn = models.CharField('ОГРН', max_length=13, unique=True, db_index=True, validators=[
+    ogrn = models.CharField('ОГРН', max_length=13, db_index=True, validators=[
                             MinLengthValidator(13), IsNumericValidator])
 
     # city = models.ForeignKey(City, verbose_name='город', on_delete=models.CASCADE)
