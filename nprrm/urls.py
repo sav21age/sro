@@ -8,13 +8,13 @@ from django.conf import settings
 from pages.sitemaps import (
     CompensationFundSitemap, ContactSitemap, DecisionMeetingSitemap, FederalLawSitemap, FoundingDocumentSitemap, 
     IndexSitemap, InspectionSitemap, JoinUsSitemap, LocalRegulationSitemap, MemberSitemap,
-    NewsSitemap, PriorityDirectionSitemap, RegulatoryLegalSitemap, ReportingSitemap,
+    NewsSitemap, PriorityDirectionSitemap, RegulatoryLegalSitemap, ReportingSitemap, SOUTResultSitemap,
     TechnicalRegulationSitemap)
 from pages.views import (
     CompensationFundPageList, ContactPageDetail, DecisionMeetingPageList, FederalLawPageList, FoundingDocumentPageList,
     IndexPageDetail, InspectionPageList, JoinUsPageDetail, LocalRegulationPageList,
     MemberExcludedPageList, MemberPageList, NewsPageList, PriorityDirectionPageDetail,
-    RegulatoryLegalPageList, ReportingPageList, TechnicalRegulationPageList)
+    RegulatoryLegalPageList, ReportingPageList, SOUTResultPageList, TechnicalRegulationPageList)
 
 
 admin.site.site_header = admin.site.site_title = 'Ассоциация «РегионРемМонтаж ПБ»'
@@ -30,6 +30,7 @@ sitemaps = {
     'inspection': InspectionSitemap,
     'd-m': DecisionMeetingSitemap,
     'reporting': ReportingSitemap,
+    'sout-r': SOUTResultSitemap,
     'news': NewsSitemap,
     'j-u': JoinUsSitemap,
     't-r': TechnicalRegulationSitemap,
@@ -55,6 +56,7 @@ urlpatterns = [
     path('inspection/', InspectionPageList.as_view(), name='inspection_list'),
     path('decision-meetings/', DecisionMeetingPageList.as_view(), name='d-m_list'),
     path('reporting/', ReportingPageList.as_view(), name='reporting_list'),
+    path('sout-result/', SOUTResultPageList.as_view(), name='sout-r_list'),
     path('news/', NewsPageList.as_view(), name='news_list'),
     path('join-us/', JoinUsPageDetail.as_view(), name='j-u_detail'),
 

@@ -74,6 +74,16 @@ class Reporting(DocumentYear):
 # --
 
 
+class SOUTResult(DocumentName):
+    upload_to = 'sout-result'
+
+    class Meta:
+        verbose_name = 'результаты проведения СОУТ'
+        verbose_name_plural = 'результаты проведения СОУТ'
+
+# --
+
+
 class TechnicalRegulation(DocumentName):
     upload_to = 'technical-regulations'
 
@@ -120,7 +130,7 @@ class LocalRegulation(DocumentName):
 
 senders = [
     FoundingDocument, CompensationFund, Inspection, DecisionMeeting,
-    Reporting, TechnicalRegulation, FederalLaw, RegulatoryLegal, 
+    Reporting, SOUTResult, TechnicalRegulation, FederalLaw, RegulatoryLegal, 
     LocalRegulation,
 ]
 @receiver_multiple(post_save, senders)

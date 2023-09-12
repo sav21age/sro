@@ -14,7 +14,7 @@
           <div class="ms-auto">  
             <div class="navbar-nav py-2 py-md-0">
               <div class="nav-item dropdown">
-                <button class="nav-link btn dropdown-toggle {% navlink request 'f-d_list, p-d_detail, members_list, c-f_list, inspection_list, d-m_list, reporting_list' %}" data-bs-toggle="dropdown" aria-expanded="false">Об Ассоциации</button>
+                <button class="nav-link btn dropdown-toggle {% navlink request 'f-d_list, p-d_detail, members_list, c-f_list, inspection_list, d-m_list, reporting_list, sout-r_list' %}" data-bs-toggle="dropdown" aria-expanded="false">Об Ассоциации</button>
                 <div class="dropdown-menu rounded-0 rounded-bottom mt-md-1 px-2 px-md-1">
                     <a href="{% url 'f-d_list' %}" class="nav-item nav-link {% navlink request 'f-d_list' %}" itemprop="url">Учредительные документы</a>
                     <a href="{% url 'p-d_detail' %}" class="nav-item nav-link {% navlink request 'p-d_detail' %}" itemprop="url">Приоритетные направления</a>
@@ -23,6 +23,7 @@
                     <a href="{% url 'inspection_list' %}" class="nav-item nav-link {% navlink request 'inspection_list' %}" itemprop="url">Проверка организаций</a>
                     <a href="{% url 'd-m_list' %}" class="nav-item nav-link {% navlink request 'd-m_list' %}" itemprop="url">Решения собраний</a>
                     <a href="{% url 'reporting_list' %}" class="nav-item nav-link {% navlink request 'reporting_list' %}" itemprop="url">Отчетность</a>
+                    <a href="{% url 'sout-r_list' %}" class="nav-item nav-link {% navlink request 'sout-r_list' %}" itemprop="url">Результаты проведения СОУТ</a>
                 </div>
               </div>
           

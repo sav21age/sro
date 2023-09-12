@@ -8,12 +8,12 @@ from common.mixins import CacheMixin
 from components.models import Member, News
 from documents.models import (
     CompensationFund, DecisionMeeting, FederalLaw, FoundingDocument, Inspection,
-    LocalRegulation, RegulatoryLegal, Reporting, TechnicalRegulation)
+    LocalRegulation, RegulatoryLegal, Reporting, SOUTResult, TechnicalRegulation)
 from files.models import File
 from pages.models import (
     CompensationFundPage, ContactPage, DecisionMeetingPage, FederalLawPage, FoundingDocumentPage, IndexPage,
     InspectionPage, JoinUsPage, LocalRegulationPage, MemberExcludedPage, MemberPage,
-    NewsPage, PriorityDirectionPage, RegulatoryLegalPage, ReportingPage,
+    NewsPage, PriorityDirectionPage, RegulatoryLegalPage, ReportingPage, SOUTResultPage,
     TechnicalRegulationPage)
 from pure_pagination.mixins import PaginationMixin
 
@@ -173,18 +173,36 @@ class ReportingPageList(CacheMixin, ListView):
     template_name = 'reporting/list.html'
     queryset = Reporting.is_visible_objects.all()
 
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+
+    #     try:
+    #         context['object'] = ReportingPage.objects\
+    #             .prefetch_related(
+    #                 Prefetch(
+    #                 'files',
+    #                 queryset=File.is_visible_objects.all(),
+    #                 # to_attr='is_visible_files'
+    #                 )
+    #             ).get()
+    #     except ObjectDoesNotExist:
+    #         raise Http404
+
+    #     return context
+
+#--
+
+
+class SOUTResultPageList(CacheMixin, ListView):
+    model = SOUTResult
+    template_name = 'sout-result/list.html'
+    queryset = SOUTResult.is_visible_objects.all()
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
         try:
-            context['object'] = ReportingPage.objects\
-                .prefetch_related(
-                    Prefetch(
-                    'files',
-                    queryset=File.is_visible_objects.all(),
-                    # to_attr='is_visible_files'
-                    )
-                ).get()
+            context['object'] = SOUTResultPage.objects.get()
         except ObjectDoesNotExist:
             raise Http404
 

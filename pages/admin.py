@@ -2,8 +2,8 @@ from django.contrib import admin
 from solo.admin import SingletonModelAdmin
 from common.admin import SimplePageAdmin, TextPageAdmin
 from files.admin import FileInline
-from pages.forms import CompensationFundPageAdminForm, ContactPageAdminForm, DecisionMeetingPageAdminForm, FederalLawPageAdminForm, FoundingDocumentPageAdminForm, IndexPageAdminForm, InspectionPageAdminForm, JoinUsPageAdminForm, LocalRegulationPageAdminForm, MemberExcludedPageAdminForm, MemberPageAdminForm, PriorityDirectionPageAdminForm, RegulatoryLegalPageAdminForm, ReportingPageAdminForm, TechnicalRegulationPageAdminForm
-from pages.models import CompensationFundPage, ContactPage, DecisionMeetingPage, FederalLawPage, FoundingDocumentPage, IndexPage, InspectionPage, JoinUsPage, LocalRegulationPage, MemberExcludedPage, MemberPage, NewsPage, PriorityDirectionPage, RegulatoryLegalPage, ReportingPage, TechnicalRegulationPage
+from pages.forms import CompensationFundPageAdminForm, ContactPageAdminForm, DecisionMeetingPageAdminForm, FederalLawPageAdminForm, FoundingDocumentPageAdminForm, IndexPageAdminForm, InspectionPageAdminForm, JoinUsPageAdminForm, LocalRegulationPageAdminForm, MemberExcludedPageAdminForm, MemberPageAdminForm, PriorityDirectionPageAdminForm, RegulatoryLegalPageAdminForm, ReportingPageAdminForm, SOUTResultPageAdminForm, TechnicalRegulationPageAdminForm
+from pages.models import CompensationFundPage, ContactPage, DecisionMeetingPage, FederalLawPage, FoundingDocumentPage, IndexPage, InspectionPage, JoinUsPage, LocalRegulationPage, MemberExcludedPage, MemberPage, NewsPage, PriorityDirectionPage, RegulatoryLegalPage, ReportingPage, SOUTResultPage, TechnicalRegulationPage
 
 @admin.register(IndexPage)
 class IndexPageAdmin(SimplePageAdmin, SingletonModelAdmin):
@@ -59,7 +59,6 @@ class MemberAdmin(SimplePageAdmin, TextPageAdmin, SingletonModelAdmin):
 class MemberExcludedAdmin(SimplePageAdmin, TextPageAdmin, SingletonModelAdmin):
     form = MemberExcludedPageAdminForm
 
-
 # --
 
 
@@ -87,7 +86,14 @@ class DecisionMeetingPageAdmin(SimplePageAdmin, TextPageAdmin, SingletonModelAdm
 @admin.register(ReportingPage)
 class ReportingPageAdmin(SimplePageAdmin, SingletonModelAdmin):
     form = ReportingPageAdminForm
-    inlines = (FileInline,)
+    # inlines = (FileInline,)
+
+# --
+
+
+@admin.register(SOUTResultPage)
+class SOUTResultPageAdmin(SimplePageAdmin, TextPageAdmin, SingletonModelAdmin):
+    form = SOUTResultPageAdminForm
 
 # --
 

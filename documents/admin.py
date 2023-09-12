@@ -3,10 +3,10 @@ from common.admin import DocumentNameAdmin, DocumentDateAdmin, DocumentYearAdmin
 from documents.forms import (
     CompensationFundAdminForm, DecisionMeetingAdminForm, FederalLawAdminForm,
     FoundingDocumentAdminForm, InspectionAdminForm, LocalRegulationAdminForm,
-    RegulatoryLegalAdminForm, ReportingAdminForm, TechnicalRegulationAdminForm)
+    RegulatoryLegalAdminForm, ReportingAdminForm, SOUTResultAdminForm, TechnicalRegulationAdminForm)
 from documents.models import (
     CompensationFund, DecisionMeeting, FederalLaw, FoundingDocument, Inspection,
-    LocalRegulation, RegulatoryLegal, Reporting, TechnicalRegulation)
+    LocalRegulation, RegulatoryLegal, Reporting, SOUTResult, TechnicalRegulation)
 
 
 @admin.register(FoundingDocument)
@@ -49,6 +49,13 @@ class ReportingAdmin(DocumentYearAdmin):
     list_display = ('year', 'upload_to',)
     list_filter = ('upload_to',)
     form = ReportingAdminForm
+
+#--
+
+
+@admin.register(SOUTResult)
+class SOUTResultAdmin(DocumentNameAdmin):
+    form = SOUTResultAdminForm
 
 #--
 

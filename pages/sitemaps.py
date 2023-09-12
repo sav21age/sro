@@ -6,7 +6,7 @@ from components.models import News
 from pages.models import (
     CompensationFundPage, ContactPage, DecisionMeetingPage, FederalLawPage, FoundingDocumentPage, InspectionPage,
     JoinUsPage, LocalRegulationPage, MemberPage, PriorityDirectionPage, RegulatoryLegalPage, 
-    ReportingPage, TechnicalRegulationPage)
+    ReportingPage, SOUTResultPage, TechnicalRegulationPage)
 
 
 class IndexSitemap(Sitemap):
@@ -114,6 +114,19 @@ class ReportingSitemap(Sitemap):
 
     def location(self, item):
         return reverse('reporting_list')
+
+#--
+
+
+class SOUTResultSitemap(Sitemap):
+    priority = 1
+
+    def items(self):
+        # return ['reporting',]
+        return SOUTResultPage.objects.order_by('id').all()
+
+    def location(self, item):
+        return reverse('sout-r_list')
 
 #--
 

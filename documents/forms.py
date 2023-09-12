@@ -1,7 +1,7 @@
 from common.forms import DocumentNameAdminForm, DocumentDateAdminForm, DocumentYearAdminForm
 from documents.models import (
     CompensationFund, DecisionMeeting, FederalLaw, FoundingDocument, Inspection,
-    LocalRegulation, RegulatoryLegal, Reporting, TechnicalRegulation)
+    LocalRegulation, RegulatoryLegal, Reporting, SOUTResult, TechnicalRegulation)
 
 
 class TechnicalRegulationAdminForm(DocumentNameAdminForm):
@@ -49,6 +49,13 @@ class FoundingDocumentAdminForm(DocumentNameAdminForm):
 class ReportingAdminForm(DocumentYearAdminForm):
     class Meta(DocumentYearAdminForm.Meta):
         model = Reporting
+
+# --
+
+
+class SOUTResultAdminForm(DocumentNameAdminForm):
+    class Meta(DocumentNameAdminForm.Meta):
+        model = SOUTResult
 
 # --
 

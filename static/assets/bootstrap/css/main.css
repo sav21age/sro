@@ -284,6 +284,13 @@ section, .section {
   background-repeat: no-repeat;
 }
 
+.sout-result-background {
+  background-image: url(../../../images/background/sout-result.jpg);
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
 .documents-background {
   background-image: url(../../../images/background/documents3.jpg);
   background-size: cover;

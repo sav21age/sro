@@ -1,4 +1,5 @@
 {% load static upload_to %}
+{% if object_list %}
 <div class="table-responsive">
 <table class="table table-borderless table-striped table-responsive align-middle">
     <thead>
@@ -25,3 +26,4 @@
     </tbody>
 </table>
 </div>
+{% endif %}

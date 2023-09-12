@@ -80,11 +80,19 @@ class DecisionMeetingPage(SimplePage, TextPage, SingletonModel):
 
 
 class ReportingPage(SimplePage, SingletonModel):
-    files = fields.GenericRelation(File)
+    # files = fields.GenericRelation(File)
 
     class Meta:
         verbose_name = 'отчетность'
         verbose_name_plural = 'отчетность'
+
+# --
+
+
+class SOUTResultPage(SimplePage, TextPage, SingletonModel):
+    class Meta:
+        verbose_name = 'результаты проведения СОУТ'
+        verbose_name_plural = 'результаты проведения СОУТ'
 
 # --
 
@@ -163,8 +171,8 @@ class ContactPage(SimplePage, SingletonModel):
 senders = [
     IndexPage, FoundingDocumentPage, PriorityDirectionPage, MemberPage, 
     MemberExcludedPage, CompensationFundPage, InspectionPage, DecisionMeetingPage,
-    ReportingPage, NewsPage, JoinUsPage, TechnicalRegulationPage, FederalLawPage,
-    RegulatoryLegalPage, LocalRegulationPage, ContactPage,
+    ReportingPage, SOUTResultPage, NewsPage, JoinUsPage, TechnicalRegulationPage, 
+    FederalLawPage, RegulatoryLegalPage, LocalRegulationPage, ContactPage,
 ]
 signal = [post_save, post_delete,]
 @receiver_multiple(signal, senders)

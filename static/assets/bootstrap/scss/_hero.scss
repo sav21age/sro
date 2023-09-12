@@ -58,6 +58,11 @@
     @include hero_background;
 }
 
+.sout-result-background {
+    background-image: url(../../../images/background/sout-result.jpg);
+    @include hero_background;
+}
+
 .documents-background {
     background-image: url(../../../images/background/documents3.jpg);
     @include hero_background;

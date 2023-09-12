@@ -5,7 +5,7 @@ from common.forms import SimplePageAdminForm, TextPageAdminForm
 from pages.models import (
     CompensationFundPage, ContactPage, DecisionMeetingPage, FederalLawPage,
     IndexPage, InspectionPage, JoinUsPage, LocalRegulationPage, MemberPage,
-    PriorityDirectionPage, RegulatoryLegalPage, ReportingPage,
+    PriorityDirectionPage, RegulatoryLegalPage, ReportingPage, SOUTResultPage,
     TechnicalRegulationPage)
 
 
@@ -86,6 +86,13 @@ class DecisionMeetingPageAdminForm(SimplePageAdminForm, TextPageAdminForm):
 class ReportingPageAdminForm(SimplePageAdminForm):
     class Meta(SimplePageAdminForm.Meta):
         model = ReportingPage
+
+# --
+
+
+class SOUTResultPageAdminForm(SimplePageAdminForm, TextPageAdminForm):
+    class Meta(SimplePageAdminForm.Meta):
+        model = SOUTResultPage
 
 # --
 
