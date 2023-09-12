@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block head %}
+  {% include 'head.html' %}
+  <meta property="og:url" content="{{host}}{% url 'f-d_list' %}">
+{% endblock %} 
+
+{% block hero_background %}reporting-background{% endblock %}
+
+{% block content %}
+
+<section class="news">
+  <div class="container">
+    {% if object.title %}
+    <div class="section-title">
+      <h1>{{object.title}}</h1>
+    </div>
+    {% endif %}
+    
+    {{ object.text_top|safe }}
+    {% include "document-name.html" %}
+    {{ object.text_bottom|safe }}
+
+  </div>
+</section>
+
+{% endblock %}

@@ -21,6 +21,14 @@ class IndexPage(SimplePage, SingletonModel):
 # --
 
 
+class FoundingDocumentPage(SimplePage, TextPage, SingletonModel):
+    class Meta:
+        verbose_name = 'учредительные документы'
+        verbose_name_plural = 'учредительные документы'
+
+# --
+
+
 class PriorityDirectionPage(SimplePage, SingletonModel):
     text = models.TextField('текст', blank=True)
 
@@ -153,8 +161,8 @@ class ContactPage(SimplePage, SingletonModel):
 
 
 senders = [
-    IndexPage, PriorityDirectionPage, MemberPage, MemberExcludedPage,
-    CompensationFundPage, InspectionPage, DecisionMeetingPage,
+    IndexPage, FoundingDocumentPage, PriorityDirectionPage, MemberPage, 
+    MemberExcludedPage, CompensationFundPage, InspectionPage, DecisionMeetingPage,
     ReportingPage, NewsPage, JoinUsPage, TechnicalRegulationPage, FederalLawPage,
     RegulatoryLegalPage, LocalRegulationPage, ContactPage,
 ]

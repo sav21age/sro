@@ -11,7 +11,7 @@ from documents.models import (
     LocalRegulation, RegulatoryLegal, Reporting, TechnicalRegulation)
 from files.models import File
 from pages.models import (
-    CompensationFundPage, ContactPage, DecisionMeetingPage, FederalLawPage, IndexPage,
+    CompensationFundPage, ContactPage, DecisionMeetingPage, FederalLawPage, FoundingDocumentPage, IndexPage,
     InspectionPage, JoinUsPage, LocalRegulationPage, MemberExcludedPage, MemberPage,
     NewsPage, PriorityDirectionPage, RegulatoryLegalPage, ReportingPage,
     TechnicalRegulationPage)
@@ -25,11 +25,29 @@ class IndexPageDetail(CacheMixin, DetailView):
     def get_object(self, queryset=None):
         return IndexPage.objects.get()
 
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+
+    #     try:
+    #         context['founding_document_list'] = FoundingDocument.is_visible_objects.all()
+    #     except ObjectDoesNotExist:
+    #         raise Http404
+
+    #     return context
+
+#--
+
+
+class FoundingDocumentPageList(CacheMixin, ListView):
+    model = FoundingDocument
+    template_name = 'founding-document/list.html'
+    queryset = FoundingDocument.is_visible_objects.all()
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
         try:
-            context['founding_document_list'] = FoundingDocument.is_visible_objects.all()
+            context['object'] = FoundingDocumentPage.objects.get()
         except ObjectDoesNotExist:
             raise Http404
 

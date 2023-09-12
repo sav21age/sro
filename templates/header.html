@@ -14,8 +14,9 @@
           <div class="ms-auto">  
             <div class="navbar-nav py-2 py-md-0">
               <div class="nav-item dropdown">
-                <button class="nav-link btn dropdown-toggle {% navlink request 'p-d_detail, members_list, c-f_list, inspection_list, d-m_list, reporting_list' %}" data-bs-toggle="dropdown" aria-expanded="false">Об Ассоциации</button>
+                <button class="nav-link btn dropdown-toggle {% navlink request 'f-d_list, p-d_detail, members_list, c-f_list, inspection_list, d-m_list, reporting_list' %}" data-bs-toggle="dropdown" aria-expanded="false">Об Ассоциации</button>
                 <div class="dropdown-menu rounded-0 rounded-bottom mt-md-1 px-2 px-md-1">
+                    <a href="{% url 'f-d_list' %}" class="nav-item nav-link {% navlink request 'f-d_list' %}" itemprop="url">Учредительные документы</a>
                     <a href="{% url 'p-d_detail' %}" class="nav-item nav-link {% navlink request 'p-d_detail' %}" itemprop="url">Приоритетные направления</a>
                     <a href="{% url 'members_list' %}" class="nav-item nav-link {% navlink request 'members_list' %}" itemprop="url">Реестр членов</a>
                     <a href="{% url 'c-f_list' %}" class="nav-item nav-link {% navlink request 'c-f_list' %}" itemprop="url">Компенсационный фонд</a>

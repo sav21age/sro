@@ -6,12 +6,12 @@ from django.contrib.sitemaps.views import sitemap
 from django.contrib.auth import views as auth_views
 from django.conf import settings
 from pages.sitemaps import (
-    CompensationFundSitemap, ContactSitemap, DecisionMeetingSitemap, FederalLawSitemap, 
+    CompensationFundSitemap, ContactSitemap, DecisionMeetingSitemap, FederalLawSitemap, FoundingDocumentSitemap, 
     IndexSitemap, InspectionSitemap, JoinUsSitemap, LocalRegulationSitemap, MemberSitemap,
     NewsSitemap, PriorityDirectionSitemap, RegulatoryLegalSitemap, ReportingSitemap,
     TechnicalRegulationSitemap)
 from pages.views import (
-    CompensationFundPageList, ContactPageDetail, DecisionMeetingPageList, FederalLawPageList,
+    CompensationFundPageList, ContactPageDetail, DecisionMeetingPageList, FederalLawPageList, FoundingDocumentPageList,
     IndexPageDetail, InspectionPageList, JoinUsPageDetail, LocalRegulationPageList,
     MemberExcludedPageList, MemberPageList, NewsPageList, PriorityDirectionPageDetail,
     RegulatoryLegalPageList, ReportingPageList, TechnicalRegulationPageList)
@@ -23,6 +23,7 @@ admin.site.site_header = admin.site.site_title = 'Ассоциация «Рег�
 
 sitemaps = {
     'index': IndexSitemap,
+    'f-d': FoundingDocumentSitemap,
     'p-d': PriorityDirectionSitemap,
     'members': MemberSitemap,
     'c-f': CompensationFundSitemap,
@@ -46,6 +47,7 @@ urlpatterns = [
     
     path('', IndexPageDetail.as_view(), name='index'),
 
+    path('founding-documents/', FoundingDocumentPageList.as_view(), name='f-d_list'),
     path('priority-directions/', PriorityDirectionPageDetail.as_view(), name='p-d_detail'),
     path('members/', MemberPageList.as_view(), name='members_list'),
     path('members/excluded/', MemberExcludedPageList.as_view(), name='members_excluded_list'),

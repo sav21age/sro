@@ -2,8 +2,8 @@ from django.contrib import admin
 from solo.admin import SingletonModelAdmin
 from common.admin import SimplePageAdmin, TextPageAdmin
 from files.admin import FileInline
-from pages.forms import CompensationFundPageAdminForm, ContactPageAdminForm, DecisionMeetingPageAdminForm, FederalLawPageAdminForm, IndexPageAdminForm, InspectionPageAdminForm, JoinUsPageAdminForm, LocalRegulationPageAdminForm, MemberExcludedPageAdminForm, MemberPageAdminForm, PriorityDirectionPageAdminForm, RegulatoryLegalPageAdminForm, ReportingPageAdminForm, TechnicalRegulationPageAdminForm
-from pages.models import CompensationFundPage, ContactPage, DecisionMeetingPage, FederalLawPage, IndexPage, InspectionPage, JoinUsPage, LocalRegulationPage, MemberExcludedPage, MemberPage, NewsPage, PriorityDirectionPage, RegulatoryLegalPage, ReportingPage, TechnicalRegulationPage
+from pages.forms import CompensationFundPageAdminForm, ContactPageAdminForm, DecisionMeetingPageAdminForm, FederalLawPageAdminForm, FoundingDocumentPageAdminForm, IndexPageAdminForm, InspectionPageAdminForm, JoinUsPageAdminForm, LocalRegulationPageAdminForm, MemberExcludedPageAdminForm, MemberPageAdminForm, PriorityDirectionPageAdminForm, RegulatoryLegalPageAdminForm, ReportingPageAdminForm, TechnicalRegulationPageAdminForm
+from pages.models import CompensationFundPage, ContactPage, DecisionMeetingPage, FederalLawPage, FoundingDocumentPage, IndexPage, InspectionPage, JoinUsPage, LocalRegulationPage, MemberExcludedPage, MemberPage, NewsPage, PriorityDirectionPage, RegulatoryLegalPage, ReportingPage, TechnicalRegulationPage
 
 @admin.register(IndexPage)
 class IndexPageAdmin(SimplePageAdmin, SingletonModelAdmin):
@@ -23,6 +23,12 @@ class IndexPageAdmin(SimplePageAdmin, SingletonModelAdmin):
                 'fields': ('founders',)
             }),
         )
+
+#--
+
+@admin.register(FoundingDocumentPage)
+class FoundingDocumentPageAdmin(SimplePageAdmin, TextPageAdmin, SingletonModelAdmin):
+    form = FoundingDocumentPageAdminForm
 
 #--
 

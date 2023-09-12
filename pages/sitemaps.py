@@ -4,7 +4,7 @@ from django.core.paginator import Paginator
 from django.conf import settings
 from components.models import News
 from pages.models import (
-    CompensationFundPage, ContactPage, DecisionMeetingPage, FederalLawPage, InspectionPage,
+    CompensationFundPage, ContactPage, DecisionMeetingPage, FederalLawPage, FoundingDocumentPage, InspectionPage,
     JoinUsPage, LocalRegulationPage, MemberPage, PriorityDirectionPage, RegulatoryLegalPage, 
     ReportingPage, TechnicalRegulationPage)
 
@@ -17,6 +17,22 @@ class IndexSitemap(Sitemap):
 
     def location(self, item):
         return reverse('index')
+
+#--
+
+
+class FoundingDocumentSitemap(Sitemap):
+    priority = 1
+
+    def items(self):
+        # return ['priority-directions']
+        return FoundingDocumentPage.objects.order_by('id').all()
+
+    def lastmod(self, obj):
+        return obj.updated_at
+
+    def location(self, item):
+        return reverse('f-d_list')
 
 #--
 

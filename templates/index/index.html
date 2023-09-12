@@ -27,8 +27,7 @@
 {% include "text-secondary.html" %}
 {% endwith %}
 
-{% comment %} <div class="section pt-0"> {% endcomment %}
-<div class="section-secondary">
+{% comment %} <div class="section-secondary">
   <div class="container">
     <div class="section-title">
       <span>Учредительные документы</span>
@@ -36,29 +35,7 @@
     {% with object_list=founding_document_list %}
     {% include 'document-name.html' %}
     {% endwith %}
-    {% comment %} <div class="table-responsive">
-      <table class="table table-borderless table-striped align-middle">
-        <thead>
-        <tr>
-          <th class="col-10">Название</th>
-          <th class="text-center col-2">Файл</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for object in founding_document_list %}
-        <tr>
-          <td>
-            {{ object.name }}
-          </td>
-          <td class="text-center">
-            <a href="{% get_media_prefix %}{{ object.file_path }}" title="размер: {{ object.file_size }}"></a>
-          </td>
-        </tr>
-      {% endfor %}
-      </tbody>
-      </table>
-    </div> {% endcomment %}
   </div>
-</div>
+</div> {% endcomment %}
 
 {% endblock %}

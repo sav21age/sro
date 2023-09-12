@@ -32,6 +32,12 @@ class IndexPageAdminForm(SimplePageAdminForm):
 
 # --
 
+class FoundingDocumentPageAdminForm(SimplePageAdminForm, TextPageAdminForm):
+    class Meta(SimplePageAdminForm.Meta):
+        model = CompensationFundPage
+
+#--
+
 
 class PriorityDirectionPageAdminForm(SimplePageAdminForm):
     # text = forms.CharField(label='Текст', required=False ,widget=codemirror_widget)
