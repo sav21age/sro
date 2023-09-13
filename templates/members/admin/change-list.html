@@ -1,18 +1,25 @@
 {% extends 'admin/change_list.html' %}
 
 {% block object-tools %}
-    <div style="float:left; margin-right: 10px;">
-        <form action="export-members/" method="POST">
-            {% csrf_token %}
-                <input type="submit" value="Экспорт членов">
-        </form>
-    </div>
-    <div>
-        <form action="export-excluded-members/" method="POST">
-            {% csrf_token %}
-                <input type="submit" value="Экспорт исключенных членов">
-        </form>
-    </div>
-    <br />
-    {{ block.super }}
+<span>Экспорт:</span>
+<div>
+    <form action="export-members/" method="POST" style="float:left; margin-right: 5px;">
+        {% csrf_token %}
+        <input type="submit" style="padding: 5px 7px;" value="в PDF">
+    </form>
+    <form action="export-excluded-members/" method="POST" style="float:left; margin-right: 5px;">
+        {% csrf_token %}
+        <input type="submit" style="padding: 5px 7px;" value="исключенных членов в PDF">
+    </form>
+    <form action="export-members-xls/" method="POST" style="float:left; margin-right: 5px;">
+    {% csrf_token %}
+        <input type="submit" style="padding: 5px 7px;" value="в Excel">
+    </form>
+    <form action="export-excluded-members-xls/" method="POST">
+        {% csrf_token %}
+        <input type="submit" style="padding: 5px 7px;" value="исключенных членов в Excel">
+    </form>
+    <br style="clear: left"/>
+</div>
+{{ block.super }}
 {% endblock %}

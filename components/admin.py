@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path
 from django.utils.safestring import mark_safe
-from components.export import export_to_pdf
+from components.export import export_to_pdf, export_to_xls
 from components.forms import NewsAdminForm
 from components.models import Location, Member, News, OrgForm, Position
 from files.admin import FileInline
@@ -101,6 +101,8 @@ class MemberAdmin(admin.ModelAdmin):
         export_urls = [
             path('export-members/', self.export_members),
             path('export-excluded-members/', self.export_excluded_members),
+            path('export-members-xls/', self.export_members_xls),
+            path('export-excluded-members-xls/', self.export_excluded_members_xls),
         ]
         return export_urls + urls
 
@@ -114,7 +116,7 @@ class MemberAdmin(admin.ModelAdmin):
              'ИНН',
              'ОГРН',
              'Место нахождения',
-             'Должность и ФИО руководителя'],
+             'Должность и ФИО руководителя',],
         ]
 
         qs = self.model.objects.filter(excluded=False)
@@ -167,3 +169,64 @@ class MemberAdmin(admin.ModelAdmin):
         table_col_widths = [1.7, 0.95, 2.25, 0.9, 1.1, 1.5, 1.4, 1.0] #in inch
 
         return export_to_pdf("registry-of-excluded-members.pdf", title, data, table_col_widths)
+
+    def export_members_xls(self, request):
+        data = [
+            ['Регистрационный номер',
+             'Дата регистрации',
+             'Наименование организации',
+             'ИНН',
+             'ОГРН',
+             'Место нахождения',
+             'Должность и ФИО руководителя',],
+        ]
+
+        qs = self.model.objects.filter(excluded=False)
+        for obj in qs:
+            row = []
+            row.append(obj.reg_num)
+            row.append(obj.reg_date.strftime("%d.%m.%Y"))
+            row.append(f"{obj.org_form.fullname} {obj.company_fullname}" +
+                       "\n" + f"({obj.org_form.shortname} {obj.company_shortname})")
+            row.append(obj.inn)
+            row.append(obj.ogrn)
+            row.append(obj.location.name)
+            row.append(
+                f"{obj.position.name} {obj.lastname} {obj.firstname} {obj.patronymic}")
+            data.append(row)
+
+            table_col_widths = (24, 17, 36, 14, 18, 20, 32,)
+
+        return export_to_xls("registry-of-members.xlsx", data, table_col_widths)
+    
+    def export_excluded_members_xls(self, request):
+        data = [
+            [
+             'Регистрационный номер',
+             'Дата регистрации',
+             'Наименование организации',
+             'ИНН',
+             'ОГРН',
+             'Место нахождения',
+             'Должность и ФИО руководителя',
+             'Дата прекращения',
+             ],
+        ]
+
+        qs = self.model.objects.filter(excluded=True)
+        for obj in qs:
+            row = []
+            row.append(obj.reg_num)
+            row.append(obj.reg_date.strftime("%d.%m.%Y"))
+            row.append(f"{obj.org_form.fullname} {obj.company_fullname}" +
+                       "\n" + f"({obj.org_form.shortname} {obj.company_shortname})")
+            row.append(obj.inn)
+            row.append(obj.ogrn)
+            row.append(obj.location.name)
+            row.append(
+                f"{obj.position.name} {obj.lastname} {obj.firstname} {obj.patronymic}")
+            row.append(obj.excluded_date.strftime("%d.%m.%Y"))
+            data.append(row)
+
+            table_col_widths = (24, 17, 36, 14, 18, 20, 32, 17,)
+        return export_to_xls("registry-of-excluded-members.xlsx", data, table_col_widths)

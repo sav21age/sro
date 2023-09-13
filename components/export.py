@@ -1,5 +1,6 @@
+import io
 import os
-from django.http import HttpResponse
+from django.http import FileResponse, HttpResponse
 from django.conf import settings
 import reportlab
 from reportlab.lib.pagesizes import A4, landscape
@@ -9,7 +10,7 @@ from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.lib import colors
-
+import xlsxwriter
 
 def export_to_pdf(filename, title, data, table_col_widths):
     s = getSampleStyleSheet()
@@ -71,48 +72,44 @@ def export_to_pdf(filename, title, data, table_col_widths):
     return response
 
 
-    # def export_to_xls(self, request):
-    #     buffer = io.BytesIO()
-    #     workbook = xlsxwriter.Workbook(buffer)
-    #     worksheet = workbook.add_worksheet()
-    #     # worksheet.write('A1', 'Some Data')
-    #     qs = self.model.objects.filter(excluded=False)
-    #     columns = ('Регистрационный номер', 'Дата регистрации', 'Наименование организации', 'ИНН', 'ОГРН', 'Место нахождения', 'Должность и ФИО руководителя')
-    #     bold = workbook.add_format({'bold': True})
-    #     row_num = 0
+def export_to_xls(filename, data, table_col_widths):
+    buffer = io.BytesIO()
+    workbook = xlsxwriter.Workbook(buffer)
+    worksheet = workbook.add_worksheet()
+    
+    bold = workbook.add_format({'bold': True, 'align': 'center',})
+    bold_yellow = workbook.add_format({'bold': True, 'bg_color': 'yellow', 'align': 'center',})
+    
+    bold_pink = workbook.add_format({'bold': True, 'bg_color': 'pink', 'align': 'center',})
+    
+    wrap = workbook.add_format({'text_wrap': True, 'valign':'vcenter'})
+    wrap_c = workbook.add_format({'text_wrap': True, 'align': 'center', 'valign':'vcenter'})
 
-    #     # Assign the titles for each cell of the header
-    #     for col_num, column_title in enumerate(columns, 0):
-    #         worksheet.write(row_num, col_num, column_title, bold)
-    #         worksheet.set_column(row_num, col_num, len(column_title))
-    #         # cell.value = column_title
-    #         # cell.alignment = Alignment(horizontal='center', vertical='center', wrap_text=False)
-    #         # cell.font = Font(bold=True)
-    #     # Iterate through all coins
-    #     for _, obj in enumerate(qs, 0):
-    #         row_num += 1
+    c = len(data)
+    worksheet.ignore_errors({"number_stored_as_text": f"D2:D{c} E2:E{c}",})
 
-    #         # Define the data for each cell in the row
-    #         row = [
-    #             obj.reg_num,
-    #             obj.reg_date.strftime("%d-%m-%Y"),
-    #             obj.org_form.fullname +' '+ obj.company_name,
-    #             obj.inn, 
-    #             obj.ogrn,
-    #             obj.city.name,
-    #             obj.position.name +' '+ obj.lastname +' '+ obj.firstname +' '+ obj.patronymic,
-    #         ]
+    for index, lst in enumerate(data):
+        for key, value in enumerate(lst):
+            if index == 0:
+                f = bold
+                if key in [1,4]:
+                    f = bold_yellow
+                if key == 7:
+                    f = bold_pink
+                worksheet.write(index, key, value, f)
 
-    #         # Assign the data for each cell of the row
-    #         for col_num, cell_value in enumerate(row, 0):
-    #             worksheet.write(row_num, col_num, cell_value)
-    #             # cell = worksheet.cell(row=row_num, column=col_num)
-    #             # cell.value = cell_value
+                # l = len(value)
+                # if key == 6:
+                #     l = l + 2
+                worksheet.set_column(key, key, table_col_widths[key])
+                # print(len(value))
+            else:
+                f = wrap_c
+                if key in [0,6]:
+                    f = wrap
+                worksheet.write(index, key, value, f)
 
-    #     workbook.close()
-    #     buffer.seek(0)
+    workbook.close()
+    buffer.seek(0)
 
-    #     return FileResponse(buffer, as_attachment=True, filename='report.xlsx')
-    #     # self.model.objects.all().update(is_immortal=True)
-    #     # self.message_user(request, "All heroes are now immortal")
-    #     # return HttpResponseRedirect("../")
+    return FileResponse(buffer, as_attachment=True, filename=filename)
