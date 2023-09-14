@@ -154,7 +154,7 @@ class ContactPage(SimplePage, SingletonModel):
         'контактное лицо', max_length=200, null=True, blank=True)
     contact_position = models.CharField(
         'должность контактного лица', max_length=200, null=True, blank=True)
-    email = models.CharField('email', max_length=50, null=True, blank=True)
+    email = models.EmailField('email', max_length=50, null=True, blank=True)
     address = models.CharField('адрес', max_length=200, null=True, blank=True)
     map = models.TextField('карта', null=True, blank=True)
 
