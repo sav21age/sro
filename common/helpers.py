@@ -37,15 +37,15 @@ def replace_quotes(value):
 
 #--
 
-def convert_bytes(num):
-    """
-    Convert bytes to KB... MB... GB... etc
-    """
-    for x in ['Б', 'КБ', 'МБ', 'ГБ', 'ТБ']:
-        if num < 1024.0:
-            # return "%3.1f %s" % (num, x)
-            return f"{num:.1f} {x}"
-        num /= 1024.0
+# def convert_bytes(num):
+#     """
+#     Convert bytes to KB... MB... GB... etc
+#     """
+#     for x in ['Б', 'КБ', 'МБ', 'ГБ', 'ТБ']:
+#         if num < 1024.0:
+#             # return "%3.1f %s" % (num, x)
+#             return f"{num:.1f} {x}"
+#         num /= 1024.0
 
 #--
 

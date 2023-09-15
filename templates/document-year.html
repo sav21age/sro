@@ -1,4 +1,4 @@
-{% load static upload_to %}
+{% load static filesize %}
 {% if object_list %}
 <div class="table-responsive">
 <table class="table table-borderless table-striped table-responsive align-middle">
@@ -19,7 +19,7 @@
             <a href="{% get_media_prefix %}{{ object.file_path }}" title="{{ caption }} {{ object.year }} г."></a>
         </td>
         <td class="text-center">
-            <small>{{ object.file_size }}</small>
+            <small>{{ object.file_size|filesize }}</small>
         </td>
         </tr>
     {% endfor %}

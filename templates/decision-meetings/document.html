@@ -1,4 +1,4 @@
-{% load static %}
+{% load static filesize %}
 <div class="table-responsive">
     <table class="table table-borderless table-striped table-responsive align-middle">
         <thead>
@@ -18,7 +18,7 @@
                     <a href="{% get_media_prefix %}{{ object.file_path }}" title="{{ object.name}} от {{ object.date|date:"d-m-Y" }} г."></a>
                 </td>
                 <td class="text-center">
-                    <small>{{ object.file_size }}</small>
+                    <small>{{ object.file_size|filesize }}</small>
                 </td>
             </tr>
         {% endfor %}

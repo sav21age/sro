@@ -1,7 +1,7 @@
 from pathlib import Path
 from django.contrib import admin
 from common.forms import SimplePageAdminForm
-from common.helpers import convert_bytes, formfield_overrides
+from common.helpers import formfield_overrides
 # from zipfile import ZipFile
 # from django.core.files.base import ContentFile
 
@@ -83,15 +83,14 @@ class FilePathAdmin(admin.ModelAdmin):
     def save_model(self, request, obj, form, change):
         super().save_model(request, obj, form, change)
 
-        if 'file_path' in form.changed_data:
-            if obj.file_path.path:
-                try:
-                    size = Path(obj.file_path.path).stat().st_size
-                    size = convert_bytes(size)
-                except FileNotFoundError:
-                    size = 0
-
-                obj.file_size = size
+        # TODO: turn on after save documents
+        # if 'file_path' in form.changed_data:
+        if obj.file_path.path:
+            try:
+                obj.file_size = Path(obj.file_path.path).stat().st_size
+                # size = convert_bytes(size)
+            except FileNotFoundError:
+                pass
 
         super().save_model(request, obj, form, change)
 

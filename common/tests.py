@@ -1,5 +1,5 @@
 from django.test import TestCase
-from common.helpers import convert_bytes, replace_quotes
+from common.helpers import replace_quotes
 
 
 class HelpersTest(TestCase):
@@ -22,15 +22,15 @@ class HelpersTest(TestCase):
         s = replace_quotes(req)
         self.assertEqual(s, 'ООО "Производственная компания" "ПК"')
 
-    def test_convert_bytes(self):
-        """ Test convert bytes """
+    # def test_convert_bytes(self):
+    #     """ Test convert bytes """
 
-        res = convert_bytes(100)
-        self.assertEqual(res, '100.0 Б')
+    #     res = convert_bytes(100)
+    #     self.assertEqual(res, '100.0 Б')
 
-        res = convert_bytes(1024)
-        self.assertEqual(res, '1.0 КБ')
+    #     res = convert_bytes(1024)
+    #     self.assertEqual(res, '1.0 КБ')
 
-        res = convert_bytes(1024*1024)
-        self.assertEqual(res, '1.0 МБ')
+    #     res = convert_bytes(1024*1024)
+    #     self.assertEqual(res, '1.0 МБ')
 
