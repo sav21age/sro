@@ -14,16 +14,9 @@ class File(models.Model):
     is_visible = models.BooleanField('показывать', default=1, db_index=True)
 
     name = models.CharField('название', max_length=250)
-    path = models.FileField('Путь к документу', max_length=250, upload_to=get_file_path,
+    path = models.FileField('путь к документу', max_length=250, upload_to=get_file_path,
         validators=(FileExtensionValidator(document_extensions),)
     )
-
-    # CHOICES = (
-    #     ('', 'None'),
-    #     ('DM', 'Решения собраний'),
-    # )
-    # purpose = models.CharField('назначение', max_length=2, choices=CHOICES, default='', blank=True)
-
 
     objects = models.Manager()
     is_visible_objects = IsVisibleManager()
